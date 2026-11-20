@@ -37,7 +37,7 @@ window.INTRANET = {
   /* Enlaces del módulo "Página web" */
   enlaces: {
     panel: "https://app.pagescms.org",
-    vistaPrevia: "",                       // ej. https://edicion--adelcatatumbo.netlify.app
+    vistaPrevia: "https://edicion--adelcatatumbo.netlify.app",
     netlify: "https://app.netlify.com",
     analytics: "https://analytics.google.com",
     github: "https://github.com",
