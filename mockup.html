@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Presentación del sitio web · ADEL Catatumbo</title>
+<link rel="icon" href="assets/img/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--teal:#449890;--teal-osc:#2f7770;--pizarra:#385f69;--pizarra-osc:#1f3b42;--verde:#6d9243;--verde-claro:#9bbf71}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{font-family:Inter,system-ui,sans-serif;color:#fff;overflow:hidden;
+    background:radial-gradient(1200px 700px at 80% -10%,rgba(68,152,144,.35),transparent 60%),
+               radial-gradient(900px 600px at -10% 110%,rgba(109,146,67,.25),transparent 60%),
+               linear-gradient(160deg,#16303a,#0f2229);}
+  .app{height:100vh;display:grid;grid-template-rows:auto 1fr auto}
+
+  /* Barra superior */
+  .barra{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:16px 28px;flex-wrap:wrap}
+  .marca{display:flex;align-items:center;gap:14px}
+  .marca .logo{background:#fff;border-radius:12px;padding:5px;display:grid;place-items:center}
+  .marca img{height:46px}
+  .marca b{display:block;font-family:"Plus Jakarta Sans";font-size:1.1rem}
+  .marca small{color:#a9c6c8;font-size:.8rem}
+  .controles{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+  .grupo{display:flex;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:4px}
+  .grupo button{font:inherit;font-size:.86rem;font-weight:600;color:#cfe2e3;background:none;border:0;border-radius:9px;padding:8px 13px;cursor:pointer;display:flex;align-items:center;gap:6px;white-space:nowrap}
+  .grupo button:hover{color:#fff}
+  .grupo button.on{background:var(--teal);color:#fff}
+  .grupo svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2}
+  .accion{font:inherit;font-size:.86rem;font-weight:600;color:#fff;background:var(--verde);border:0;border-radius:12px;padding:11px 16px;cursor:pointer;text-decoration:none;display:flex;gap:6px;align-items:center}
+  .accion.sec{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12)}
+
+  /* Escenario */
+  .escena{position:relative;display:flex;align-items:center;justify-content:center;gap:4vw;padding:10px 28px 0;min-height:0}
+  .dispositivo{position:relative;transition:opacity .35s, transform .35s}
+  .oculto{display:none!important}
+
+  /* Portátil */
+  .laptop{display:flex;flex-direction:column;align-items:center}
+  .laptop .tapa{background:#0d1214;border-radius:18px 18px 6px 6px;padding:14px 14px 18px;box-shadow:0 40px 80px rgba(0,0,0,.45),inset 0 0 0 2px #2b3438;position:relative}
+  .laptop .tapa::before{content:"";position:absolute;top:5px;left:50%;width:6px;height:6px;border-radius:50%;background:#2c3a3e;transform:translateX(-50%)}
+  .laptop .pantalla{position:relative;overflow:hidden;background:#fff;border-radius:4px}
+  .laptop .base{height:16px;background:linear-gradient(#c9d1d3,#8f9a9d);border-radius:0 0 18px 18px;position:relative;box-shadow:0 18px 30px rgba(0,0,0,.35)}
+  .laptop .base::after{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);width:16%;height:6px;background:#a5afb2;border-radius:0 0 8px 8px}
+
+  /* Celular */
+  .phone .marco{background:#0d1214;border-radius:46px;padding:12px;box-shadow:0 40px 80px rgba(0,0,0,.5),inset 0 0 0 2px #2b3438;position:relative}
+  .phone .marco::before{content:"";position:absolute;top:20px;left:50%;transform:translateX(-50%);width:90px;height:24px;border-radius:14px;background:#0d1214;z-index:5}
+  .phone .pantalla{position:relative;overflow:hidden;background:#fff;border-radius:36px}
+
+  iframe{border:0;transform-origin:0 0;position:absolute;top:0;left:0;background:#fff}
+
+  .etiqueta{position:absolute;bottom:-34px;left:50%;transform:translateX(-50%);font-size:.78rem;color:#9fbfc1;white-space:nowrap;letter-spacing:.04em}
+
+  /* Pie con notas de presentación */
+  .pie{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:18px 28px 20px;flex-wrap:wrap}
+  .nota{max-width:760px;display:flex;gap:14px;align-items:flex-start}
+  .nota .num{flex:0 0 34px;height:34px;border-radius:10px;background:rgba(155,191,113,.2);color:var(--verde-claro);display:grid;place-items:center;font-weight:800;font-family:"Plus Jakarta Sans"}
+  .nota h3{font-family:"Plus Jakarta Sans";font-size:1rem;margin-bottom:2px}
+  .nota p{font-size:.88rem;color:#b9d1d2;line-height:1.5}
+  .nav-pres{display:flex;gap:8px;align-items:center}
+  .nav-pres button{width:42px;height:42px;border-radius:12px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.06);color:#fff;font-size:1.1rem;cursor:pointer}
+  .nav-pres button:hover{background:var(--teal)}
+  .nav-pres span{font-size:.85rem;color:#9fbfc1;min-width:52px;text-align:center}
+  .puntos{display:flex;gap:6px}
+  .puntos i{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.2);cursor:pointer}
+  .puntos i.on{background:var(--verde-claro);width:22px;border-radius:6px}
+
+  body.limpio .barra .controles .grupo:first-child,body.limpio .pie{display:none}
+  @media (max-width:900px){ body{overflow:auto} .app{height:auto;min-height:100vh} .escena{flex-direction:column;gap:60px;padding:20px} }
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="barra">
+    <div class="marca">
+      <span class="logo"><img src="assets/img/logo-adel-catatumbo.png" alt="ADEL Catatumbo"></span>
+      <span><b>Sitio web ADEL Catatumbo</b><small>Prototipo funcional · navegable</small></span>
+    </div>
+    <div class="controles">
+      <div class="grupo" id="paginas"></div>
+      <div class="grupo" id="vistas">
+        <button data-v="ambos" class="on" title="Computador y celular"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="14" height="10" rx="1"/><rect x="17" y="8" width="5" height="12" rx="1"/></svg>Ambos</button>
+        <button data-v="laptop" title="Computador"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="1"/><path d="M1 20h22"/></svg>Computador</button>
+        <button data-v="phone" title="Celular"><svg viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg>Celular</button>
+      </div>
+      <button class="accion sec" id="btnPantalla" title="Pantalla completa (F)">⛶ Presentar</button>
+      <a class="accion" href="index.html" target="_blank">Abrir sitio ↗</a>
+    </div>
+  </header>
+
+  <main class="escena" id="escena">
+    <div class="dispositivo laptop" id="laptop">
+      <div class="tapa"><div class="pantalla" id="pLaptop"><iframe id="fLaptop" title="Vista computador" width="1440" height="900"></iframe></div></div>
+      <div class="base" id="baseLaptop"></div>
+      <span class="etiqueta">Computador · 1440 px</span>
+    </div>
+    <div class="dispositivo phone" id="phone">
+      <div class="marco"><div class="pantalla" id="pPhone"><iframe id="fPhone" title="Vista celular" width="390" height="844"></iframe></div></div>
+      <span class="etiqueta">Celular · 390 px</span>
+    </div>
+  </main>
+
+  <footer class="pie">
+    <div class="nota"><span class="num" id="nNum">1</span><div><h3 id="nTit"></h3><p id="nTxt"></p></div></div>
+    <div class="nav-pres">
+      <div class="puntos" id="puntos"></div>
+      <button id="ant" title="Anterior (←)">←</button><span id="cont">1 / 6</span><button id="sig" title="Siguiente (→)">→</button>
+    </div>
+  </footer>
+</div>
+
+<script>
+/* Páginas del recorrido y notas para quien presenta */
+const PAGINAS = [
+  {url:"index.html", nombre:"Inicio",
+   titulo:"Inicio: la puerta de entrada",
+   texto:"Resume la agencia: convocatoria destacada, cifras de impacto, cadenas productivas, proyectos, Red de Mujeres, mapa de cobertura y noticias. Todo se actualiza solo desde los archivos de datos."},
+  {url:"quienes-somos.html", nombre:"Quiénes somos",
+   titulo:"Quiénes somos: identidad y transparencia",
+   texto:"Misión, visión y valores, servicios, historia, equipo, mapa interactivo de los 9 municipios y documentos institucionales para rendición de cuentas."},
+  {url:"proyectos.html", nombre:"Proyectos",
+   titulo:"Proyectos: lo que hacemos en el territorio",
+   texto:"Listado con filtros por estado y línea productiva. Cada proyecto tiene su ficha con municipios, periodo, financiador y aliados."},
+  {url:"convocatorias.html", nombre:"Convocatorias",
+   titulo:"Convocatorias: oportunidades abiertas",
+   texto:"Filtros por estado y tipo, buscador, conteo de días para el cierre, descarga de términos de referencia, postulación por correo y alertas."},
+  {url:"tienda.html", nombre:"Tienda",
+   titulo:"Tienda: kits de mercado y productos del territorio",
+   texto:"Mientras llegan los productos muestra un aviso de Muy pronto. Al abrirla: catálogo con filtros, kits, carrito, opciones de entrega y pedido por WhatsApp o correo."},
+  {url:"noticias.html", nombre:"Noticias",
+   titulo:"Noticias: comunicación con la comunidad",
+   texto:"Noticias por categoría, cada una con su página propia. Publicar una noticia nueva es agregar un bloque en un solo archivo."},
+  {url:"contacto.html", nombre:"Contacto",
+   titulo:"Contacto: cercanía con aliados y productores",
+   texto:"Formulario con autorización de datos (Ley 1581 de 2012), datos de la sede, horario y mapa de ubicación en Ocaña."}
+];
+
+const $ = id => document.getElementById(id);
+let actual = 0, vista = "ambos";
+
+$("paginas").innerHTML = PAGINAS.map((p,i)=>`<button data-i="${i}">${p.nombre}</button>`).join("");
+$("puntos").innerHTML = PAGINAS.map((_,i)=>`<i data-i="${i}"></i>`).join("");
+
+function ir(i){
+  actual = (i + PAGINAS.length) % PAGINAS.length;
+  const p = PAGINAS[actual];
+  $("fLaptop").src = p.url; $("fPhone").src = p.url;
+  document.querySelectorAll("#paginas button").forEach((b,k)=>b.classList.toggle("on",k===actual));
+  document.querySelectorAll("#puntos i").forEach((b,k)=>b.classList.toggle("on",k===actual));
+  $("nNum").textContent = actual+1; $("nTit").textContent = p.titulo; $("nTxt").textContent = p.texto;
+  $("cont").textContent = `${actual+1} / ${PAGINAS.length}`;
+}
+
+/* Escala los dispositivos para que quepan en la pantalla */
+function ajustar(){
+  const esc = $("escena").getBoundingClientRect();
+  const altoDisp = Math.max(260, esc.height - 70);
+  const anchoDisp = esc.width - 56;
+  const verL = vista!=="phone", verP = vista!=="laptop";
+  $("laptop").classList.toggle("oculto",!verL); $("phone").classList.toggle("oculto",!verP);
+  // proporciones de pantalla
+  const LW=1440, LH=900, PW=390, PH=844;
+  let sL=0, sP=0;
+  if(verL && verP){
+    sP = Math.min((altoDisp-24)/PH, 0.62);
+    const anchoPhone = PW*sP + 24;
+    sL = Math.min((anchoDisp - anchoPhone - 60)/ (LW+28), (altoDisp-46)/(LH+32));
+  } else if(verL){ sL = Math.min((anchoDisp)/(LW+28), (altoDisp-46)/(LH+32)); }
+  else { sP = Math.min((altoDisp-24)/PH, 1); }
+  if(window.innerWidth<=900){ sL = (window.innerWidth-80)/(LW+28); sP = Math.min((window.innerWidth-80)/PW, .8); }
+  if(verL){ $("pLaptop").style.width=LW*sL+"px"; $("pLaptop").style.height=LH*sL+"px"; $("fLaptop").style.transform=`scale(${sL})`; $("baseLaptop").style.width=(LW*sL+28)*1.12+"px"; }
+  if(verP){ $("pPhone").style.width=PW*sP+"px"; $("pPhone").style.height=PH*sP+"px"; $("fPhone").style.transform=`scale(${sP})`; }
+}
+
+$("paginas").onclick = e => { const b=e.target.closest("button"); if(b) ir(+b.dataset.i); };
+$("puntos").onclick = e => { const b=e.target.closest("i"); if(b) ir(+b.dataset.i); };
+$("ant").onclick = () => ir(actual-1);
+$("sig").onclick = () => ir(actual+1);
+$("vistas").onclick = e => { const b=e.target.closest("button"); if(!b) return;
+  vista=b.dataset.v; document.querySelectorAll("#vistas button").forEach(x=>x.classList.toggle("on",x===b)); ajustar(); };
+$("btnPantalla").onclick = () => document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen?.();
+document.addEventListener("keydown", e => {
+  if(e.target.tagName==="INPUT") return;
+  if(e.key==="ArrowRight") ir(actual+1);
+  if(e.key==="ArrowLeft") ir(actual-1);
+  if(e.key==="f"||e.key==="F") $("btnPantalla").click();
+  if(e.key==="1") $("vistas").children[0].click();
+  if(e.key==="2") $("vistas").children[1].click();
+  if(e.key==="3") $("vistas").children[2].click();
+});
+window.addEventListener("resize", ajustar);
+document.addEventListener("fullscreenchange", ()=>setTimeout(ajustar,80));
+ir(0); ajustar();
+</script>
+</body>
+</html>

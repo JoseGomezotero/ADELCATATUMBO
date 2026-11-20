@@ -1,0 +1,138 @@
+[
+  {
+    "publicado": true,
+    "id": "kit-familiar",
+    "nombre": "Kit de mercado familiar",
+    "categoria": "Kits de mercado",
+    "precio": 85000,
+    "unidad": "kit",
+    "productor": "Productores asociados del Catatumbo",
+    "descripcion": "Mercado campesino para una familia de 4 personas durante una semana.",
+    "contenido": [
+      "Cebolla ocañera 2 kg",
+      "Tomate 2 kg",
+      "Papa 3 kg",
+      "Plátano 1 racimo",
+      "Frijol 1 kg",
+      "Café 500 g",
+      "Panela 2 unidades",
+      "Frutas de temporada 2 kg"
+    ],
+    "foto": "",
+    "disponible": true,
+    "destacado": true
+  },
+  {
+    "publicado": true,
+    "id": "kit-basico",
+    "nombre": "Kit de mercado básico",
+    "categoria": "Kits de mercado",
+    "precio": 48000,
+    "unidad": "kit",
+    "productor": "Productores asociados del Catatumbo",
+    "descripcion": "Lo esencial de la huerta para 2 personas durante una semana.",
+    "contenido": [
+      "Cebolla ocañera 1 kg",
+      "Tomate 1 kg",
+      "Papa 2 kg",
+      "Plátano 6 unidades",
+      "Frijol 500 g",
+      "Panela 1 unidad"
+    ],
+    "foto": "",
+    "disponible": true,
+    "destacado": true
+  },
+  {
+    "publicado": true,
+    "id": "kit-cafetero",
+    "nombre": "Kit cafetero del Catatumbo",
+    "categoria": "Kits de mercado",
+    "precio": 62000,
+    "unidad": "kit",
+    "productor": "Organizaciones caficultoras",
+    "descripcion": "Para regalar: café de origen y productos de la Red de Mujeres.",
+    "contenido": [
+      "Café tostado en grano 500 g",
+      "Café molido 250 g",
+      "Chocolate de mesa 500 g",
+      "Mochila artesanal pequeña"
+    ],
+    "foto": "https://images.unsplash.com/photo-1633627346972-0f3dfa551171",
+    "disponible": true,
+    "destacado": true
+  },
+  {
+    "publicado": true,
+    "id": "cafe-molido",
+    "nombre": "Café de origen molido",
+    "categoria": "Café",
+    "precio": 18000,
+    "unidad": "libra 500 g",
+    "productor": "Caficultores de Teorama y San Calixto",
+    "descripcion": "Tueste medio, notas a panela y chocolate.",
+    "foto": "https://images.unsplash.com/photo-1633627346972-0f3dfa551171",
+    "disponible": true
+  },
+  {
+    "publicado": true,
+    "id": "cafe-grano",
+    "nombre": "Café especial en grano",
+    "categoria": "Café",
+    "precio": 24000,
+    "unidad": "libra 500 g",
+    "productor": "Caficultores de Hacarí",
+    "descripcion": "Café de altura, seleccionado a mano.",
+    "foto": "https://images.unsplash.com/photo-1672851613221-c56f31efce8c",
+    "disponible": true
+  },
+  {
+    "publicado": true,
+    "id": "cebolla-ocanera",
+    "nombre": "Cebolla ocañera",
+    "categoria": "Hortalizas y cebolla",
+    "precio": 6500,
+    "unidad": "atado 1 kg",
+    "productor": "Productores de Ocaña, Ábrego y La Playa",
+    "descripcion": "La cebolla roja tradicional de la provincia de Ocaña.",
+    "foto": "",
+    "disponible": true,
+    "destacado": true
+  },
+  {
+    "publicado": true,
+    "id": "canasta-hortalizas",
+    "nombre": "Canasta de hortalizas",
+    "categoria": "Hortalizas y cebolla",
+    "precio": 22000,
+    "unidad": "canasta 4 kg",
+    "productor": "Huertas de Ábrego",
+    "descripcion": "Tomate, pimentón, cilantro, habichuela y zanahoria frescos.",
+    "foto": "",
+    "disponible": true
+  },
+  {
+    "publicado": true,
+    "id": "chocolate-mesa",
+    "nombre": "Chocolate de mesa",
+    "categoria": "Cacao",
+    "precio": 15000,
+    "unidad": "libra 500 g",
+    "productor": "Cacaoteros de El Tarra y Tibú",
+    "descripcion": "100% cacao del Catatumbo, sin azúcar añadida.",
+    "foto": "",
+    "disponible": true
+  },
+  {
+    "publicado": true,
+    "id": "mochila-artesanal",
+    "nombre": "Mochila artesanal",
+    "categoria": "Artesanías",
+    "precio": 70000,
+    "unidad": "unidad",
+    "productor": "Red de Mujeres del Catatumbo",
+    "descripcion": "Tejida a mano. Cada pieza es única.",
+    "foto": "",
+    "disponible": false
+  }
+]

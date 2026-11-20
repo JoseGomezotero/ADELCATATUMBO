@@ -1,0 +1,95 @@
+INTRANET ADEL CATATUMBO · GUÍA DE ACTIVACIÓN
+============================================
+
+Dirección:  https://adelcatatumbo.org/intranet/
+Verificar cartas (público): https://adelcatatumbo.org/verificar.html
+
+MÓDULOS Y PERFILES
+                         Admin  Talento H.  Coordinación  Comunicaciones  Trabajador
+  Escritorio               ✓        ✓           ✓              ✓             ✓
+  Mis cartas / hoja vida   ✓        ✓           ✓              ✓             ✓
+  Gestión de cartas        ✓        ✓           —              —             —
+  Trabajadores             ✓        ✓           —              —             —
+  CRM de aliados           ✓        —           ✓           consulta         —
+  Página web               ✓        —           —              ✓             —
+  Usuarios y perfiles      ✓        —           —              —             —
+  Bitácora                 ✓        —           —              —             —
+  Mis tareas               ✓        ✓           ✓              ✓             ✓
+  Proyectos (ERP)          ✓        si se activa  ✓          si se activa  si se activa
+
+  Acceso ERP: Administrador y Coordinación lo tienen siempre. A cualquier otra
+  persona se le activa en Usuarios y perfiles → casilla "ERP".
+
+ESTADO ACTUAL
+  La intranet está lista, pero mientras intranet/js/config.js no tenga los
+  datos de Supabase, la página de ingreso muestra "Intranet en configuración"
+  y no deja entrar. No hay datos de ejemplo: todo lo que se registre será real.
+
+CONECTAR LA BASE DE DATOS (Supabase, gratis) · 20 minutos
+  1. Cree una cuenta en https://supabase.com con el correo de la ADEL
+     y cree un proyecto: nombre "adel-intranet", región "South America (São Paulo)".
+     Guarde la contraseña de la base de datos en un lugar seguro.
+  2. En el proyecto: SQL Editor → New query → pegue TODO el archivo
+     intranet/supabase/esquema.sql → Run. Debe decir "Success".
+  3. Authentication → URL Configuration:
+       Site URL:       https://adelcatatumbo.org/intranet/
+       Redirect URLs:  https://adelcatatumbo.org/intranet/*
+  4. Botón "Connect" del proyecto (o Project Settings → API Keys): copie
+     "Project URL" y la "Publishable key" (sb_publishable_...) y péguelas en
+     intranet/js/config.js (supabaseUrl y supabaseKey).
+     ⚠ Nunca use una clave "secret" (sb_secret_...) ni "service_role" en la página.
+  5. En config.js ponga también el nombre y cargo de quien firma las cartas.
+  6. Publique el sitio. Entre a /intranet/, pulse "Crear cuenta" y confirme
+     el correo que le llega.
+  7. Vuelva al SQL Editor y ejecute (con su correo):
+       update public.perfiles set rol = 'admin', activo = true
+       where correo = 'catatumbosistemasadel@gmail.com';
+  8. Ya como administrador: cree las hojas de vida en "Trabajadores".
+     Cada trabajador crea su cuenta; usted la activa en "Usuarios y perfiles",
+     le asigna el perfil y la vincula con su hoja de vida.
+
+MÓDULO ERP DE PROYECTOS (agregado después) · HOY OCULTO
+  Está apagado en intranet/js/config.js (modulos: { erp: false }): no aparece
+  en el menú ni consulta la base de datos. Para activarlo:
+  1) ejecute el SQL de abajo, 2) cambie a  erp: true , 3) publique.
+  Si la base de datos ya estaba creada, ejecute UNA VEZ en Supabase → SQL Editor:
+  intranet/supabase/02-erp-proyectos.sql   (debe decir "Success").
+  Incluye: portafolio con semáforo, tablero Kanban, lista por componentes,
+  cronograma (Gantt), presupuesto y gastos por rubro, indicadores/metas,
+  tareas con responsable, fechas, prioridad, lista de chequeo y comentarios.
+  Quien no tiene ERP solo ve "Mis tareas" y actualiza estado, avance y chequeo.
+
+SEGURIDAD
+  - Los permisos los aplica la base de datos (Row Level Security): aunque
+    alguien manipule la página, solo puede leer o cambiar lo que su perfil permite.
+  - Las cuentas nuevas quedan inactivas hasta que el administrador las aprueba.
+  - Nadie, salvo el administrador, puede cambiar perfiles. Siempre debe quedar
+    al menos un administrador activo.
+  - Las cartas solo se aprueban con la función responder_carta (Talento Humano
+    o Admin). Al aprobar se guarda una copia de los datos y un código único.
+  - La página pública de verificación solo muestra nombre, cargo, tipo y fecha.
+  - La bitácora registra quién crea, modifica o elimina información.
+  - La sesión se cierra sola tras 30 minutos sin actividad.
+  - Recomendado: en Supabase → Authentication → Providers → Email, dejar
+    activada la confirmación de correo. Si no quiere que cualquiera pueda
+    crear cuentas, desactive "Allow new users to sign up" e invite a cada
+    persona desde Authentication → Users → Invite.
+  - Datos personales (Ley 1581 de 2012): la información de trabajadores es
+    confidencial; otorgue el perfil Talento Humano solo a quien corresponde.
+
+PLAN GRATUITO DE SUPABASE
+  Suficiente para el equipo de la ADEL (base de datos de 500 MB y hasta
+  50.000 usuarios activos al mes). Un proyecto gratuito se pausa si pasa
+  una semana sin ningún uso; se reactiva desde el panel de Supabase.
+  Haga una copia mensual: Table Editor → cada tabla → Export to CSV
+  (o exporte desde la intranet: Trabajadores, CRM y Bitácora tienen botón Exportar).
+
+ARCHIVOS
+  intranet/index.html          ingreso, registro y recuperación de contraseña
+  intranet/app.html            aplicación (módulos)
+  intranet/carta.html          carta laboral imprimible / PDF
+  intranet/js/config.js        conexión a Supabase, firmante y enlaces
+  intranet/js/datos.js         capa de datos (conexión con Supabase)
+  intranet/js/app.js           pantallas y permisos de la interfaz
+  intranet/supabase/esquema.sql  base de datos y reglas de seguridad
+  verificar.html               verificación pública de cartas

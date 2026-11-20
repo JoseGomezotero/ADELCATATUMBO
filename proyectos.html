@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Proyectos · ADEL Catatumbo</title>
+<meta name="description" content="Proyectos de desarrollo económico local de ADEL Catatumbo: café, cebolla ocañera, red de mujeres y planeación territorial.">
+<link rel="icon" href="assets/img/favicon.png">
+<script src="assets/js/analitica.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/estilos.css">
+</head>
+<body data-pagina="proyectos">
+<div id="encabezado"></div>
+
+<section class="banner">
+  <div class="foto"><img id="bannerFoto" src="https://images.unsplash.com/photo-1633627388746-8cd271f7d526?auto=format&fit=crop&w=2000&q=70" alt="" onerror="this.remove()"></div>
+  <div class="rombo"></div>
+  <div class="wrap">
+    <div class="migas" id="migas"><a href="index.html">Inicio</a> / Proyectos</div>
+    <span class="eyebrow" id="bannerEtq">Proyectos</span>
+    <h1 id="bannerTit">Iniciativas que transforman el territorio</h1>
+    <p id="bannerTxt">Trabajamos de la mano con la cooperación internacional, la Red Adelco, las alcaldías y las organizaciones de productores del Catatumbo.</p>
+  </div>
+</section>
+
+<!-- LISTA DE PROYECTOS -->
+<section id="vistaLista" style="padding-top:0">
+  <div class="wrap">
+    <div class="filtros">
+      <div class="tabs" id="tabs">
+        <button data-f="todos" class="on">Todos</button>
+        <button data-f="ejecucion">En ejecución</button>
+        <button data-f="finalizado">Finalizados</button>
+      </div>
+      <div class="buscar"><select id="fLinea"><option value="">Todas las líneas</option></select></div>
+    </div>
+    <div class="proy-grid" id="lista"></div>
+    <p class="vacio" id="vacio">No hay proyectos en esta categoría.</p>
+  </div>
+</section>
+
+<!-- DETALLE DE UN PROYECTO (se muestra con proyectos.html?id=...) -->
+<section id="vistaDetalle" style="display:none">
+  <div class="wrap proy-detalle">
+    <div id="detalle"></div>
+    <aside><div class="ficha" id="ficha"></div></aside>
+  </div>
+</section>
+
+<section class="bg-suave">
+  <div class="wrap">
+    <div class="unete">
+      <div><h2>¿Quieres apoyar o cofinanciar un proyecto?</h2><p>Buscamos aliados que quieran invertir en el desarrollo económico y la paz del Catatumbo.</p></div>
+      <div class="btns"><a class="btn btn-blanco" href="contacto.html">Contáctanos</a><a class="btn btn-borde" href="convocatorias.html">Convocatorias</a></div>
+    </div>
+  </div>
+</section>
+
+<div id="pie"></div>
+<script src="datos/convocatorias.js"></script>
+<script src="datos/proyectos.js"></script>
+<script src="datos/sitio.js"></script>
+<script src="datos/paginas.js"></script>
+<script src="datos/paginas-extra.js"></script>
+<script src="assets/js/componentes.js"></script>
+<script src="assets/js/carrito.js"></script>
+<script>
+const id = param("id");
+const p = id && PROYECTOS.find(x=>x.id===id);
+if(p){
+  document.title = p.titulo + " · ADEL Catatumbo";
+  document.getElementById("vistaLista").style.display="none";
+  document.getElementById("vistaDetalle").style.display="block";
+  document.getElementById("migas").innerHTML = `<a href="index.html">Inicio</a> / <a href="proyectos.html">Proyectos</a> / ${p.titulo}`;
+  document.getElementById("bannerEtq").textContent = ETQ_PROY[p.estado] + (p.linea?" · " + p.linea:"");
+  document.getElementById("bannerTit").textContent = p.titulo;
+  document.getElementById("bannerTxt").textContent = p.resumen;
+  if(p.foto) document.getElementById("bannerFoto").src = foto(p.foto,2000);
+  document.getElementById("detalle").innerHTML = `
+    <div class="foto">${imgTag(p.foto,p.titulo,1400)}</div>
+    <h2 style="margin-top:0">Sobre el proyecto</h2>
+    ${(p.descripcion||[]).map(t=>`<p class="lead" style="margin-bottom:14px">${t}</p>`).join("")}
+    ${(p.objetivos||[]).length?`<h2>Objetivos</h2><ul>${p.objetivos.map(o=>`<li>${o}</li>`).join("")}</ul>`:""}
+    <p style="margin-top:34px"><a class="btn btn-sec" href="proyectos.html">← Volver a proyectos</a></p>`;
+  document.getElementById("ficha").innerHTML = `<dl>
+    <div><dt>Estado</dt><dd><span class="tag ${p.estado}">${ETQ_PROY[p.estado]}</span></dd></div>
+    ${[["Línea",p.linea],["Municipios",p.municipios],["Periodo",p.periodo],["Financiador",p.financiador],["Aliados",p.socios]].filter(x=>x[1]).map(x=>`<div><dt>${x[0]}</dt><dd>${x[1]}</dd></div>`).join("")}</dl>
+    <a class="btn btn-teal" style="width:100%;margin-top:22px" href="contacto.html">Quiero saber más</a>`;
+} else {
+  const lineas=[...new Set(PROYECTOS.map(x=>x.linea))];
+  document.getElementById("fLinea").innerHTML += lineas.map(l=>`<option>${l}</option>`).join("");
+  let f="todos";
+  const pintar=()=>{
+    const l=document.getElementById("fLinea").value;
+    const r=PROYECTOS.filter(x=>(f==="todos"||x.estado===f)&&(!l||x.linea===l));
+    document.getElementById("lista").innerHTML=r.map(tarjetaProyecto).join("");
+    document.getElementById("vacio").style.display=r.length?"none":"block";
+  };
+  document.querySelectorAll("#tabs button").forEach(b=>{
+    const n=b.dataset.f==="todos"?PROYECTOS.length:PROYECTOS.filter(x=>x.estado===b.dataset.f).length;
+    b.innerHTML+=` <span class="n">(${n})</span>`;
+    b.onclick=()=>{document.querySelectorAll("#tabs button").forEach(x=>x.classList.remove("on"));b.classList.add("on");f=b.dataset.f;pintar();};
+  });
+  document.getElementById("fLinea").onchange=pintar;
+  pintar();
+}
+</script>
+</body>
+</html>

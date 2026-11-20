@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Convocatorias · ADEL Catatumbo</title>
+<meta name="description" content="Convocatorias abiertas de ADEL Catatumbo: contratación, proveedores, consultorías y apoyo a iniciativas productivas.">
+<link rel="icon" href="assets/img/favicon.png">
+<script src="assets/js/analitica.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/estilos.css">
+</head>
+<body data-pagina="convocatorias">
+<div id="encabezado"></div>
+
+<section class="banner">
+  <div class="foto"><img src="https://images.unsplash.com/photo-1548104883-562bcc1e4c4d?auto=format&fit=crop&w=2000&q=70" alt="" onerror="this.remove()"></div>
+  <div class="rombo"></div>
+  <div class="wrap">
+    <div class="migas"><a href="index.html">Inicio</a> / Convocatorias</div>
+    <span class="eyebrow">Convocatorias</span>
+    <h1>Convocatorias y oportunidades</h1>
+    <p>Consulta los procesos de contratación, selección de proveedores y apoyo a iniciativas productivas. Descarga los términos de referencia y postúlate dentro de las fechas indicadas.</p>
+  </div>
+</section>
+
+<!-- ===== SIN CONVOCATORIAS: aviso (se muestra cuando la lista está vacía) ===== -->
+<section class="sin-conv pronto-sec" id="sinConv" style="display:none">
+  <div class="wrap pronto">
+    <div class="pronto-ilus">
+      <svg class="ilus-pronto ilus-conv" viewBox="0 0 480 420" role="img" aria-label="Megáfono anunciando próximas convocatorias">
+          <circle cx="240" cy="215" r="185" fill="#e6f2f0"/>
+          <g class="rombo-ilus"><path d="M240 50 L405 215 L240 380 L75 215 Z" fill="none" stroke="#449890" stroke-width="22" stroke-linejoin="round" stroke-dasharray="560 140" stroke-dashoffset="-40"/><path d="M75 215 L157 133" stroke="#385f69" stroke-width="22" stroke-linecap="round"/></g>
+          <g class="flota">
+            <!-- calendario -->
+            <rect x="150" y="150" width="150" height="140" rx="14" fill="#fff" stroke="#385f69" stroke-width="5"/>
+            <rect x="150" y="150" width="150" height="38" rx="14" fill="#449890"/><rect x="150" y="172" width="150" height="16" fill="#449890"/>
+            <rect x="176" y="136" width="10" height="28" rx="5" fill="#385f69"/><rect x="264" y="136" width="10" height="28" rx="5" fill="#385f69"/>
+            <g fill="#dfe7e7"><rect x="170" y="205" width="24" height="20" rx="4"/><rect x="203" y="205" width="24" height="20" rx="4"/><rect x="236" y="205" width="24" height="20" rx="4"/><rect x="269" y="205" width="14" height="20" rx="4"/><rect x="170" y="236" width="24" height="20" rx="4"/><rect x="203" y="236" width="24" height="20" rx="4"/><rect x="269" y="236" width="14" height="20" rx="4"/></g>
+            <rect x="236" y="236" width="24" height="20" rx="4" fill="#6d9243"/>
+            <path d="M242 246 l5 5 9 -10" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <!-- megáfono -->
+            <g transform="translate(250 255) rotate(-18)">
+              <path d="M0 0 L70 -34 V46 L0 12 Z" fill="#9bbf71"/>
+              <rect x="-22" y="-6" width="26" height="24" rx="6" fill="#6d9243"/>
+              <rect x="-14" y="16" width="12" height="26" rx="5" fill="#385f69"/>
+              <ellipse cx="70" cy="6" rx="10" ry="40" fill="#6d9243"/>
+            </g>
+            <g stroke="#449890" stroke-width="5" stroke-linecap="round" fill="none" class="ondas"><path d="M346 196 q18 22 0 46"/><path d="M362 184 q28 34 0 70"/></g>
+          </g>
+          <g class="etiqueta-pronto" transform="rotate(-10 360 330)">
+            <path d="M310 314 H404 a8 8 0 0 1 8 8 V340 a8 8 0 0 1 -8 8 H310 L296 331 Z" fill="#449890"/>
+            <circle cx="308" cy="331" r="3.5" fill="#fff"/>
+            <text x="356" y="336" text-anchor="middle" font-family="Plus Jakarta Sans, Inter, sans-serif" font-size="14" font-weight="800" fill="#fff">¡Atento!</text>
+          </g>
+          <g fill="#9bbf71"><path class="destello d1" d="M110 110 l7 7 -7 7 -7 -7z"/><path class="destello d2" d="M380 100 l6 6 -6 6 -6 -6z"/><path class="destello d3" d="M95 320 l6 6 -6 6 -6 -6z" fill="#449890"/></g>
+        </svg>
+    </div>
+    <div class="pronto-txt">
+      <span class="tag abierta">Próximamente</span>
+      <h2 class="h2">Pronto publicaremos nuevas convocatorias</h2>
+      <p class="lead">En este momento no tenemos convocatorias abiertas. Estamos preparando nuevas oportunidades de contratación, proveedores, consultorías y apoyo a iniciativas productivas en el Catatumbo.</p>
+      <div class="viene">
+        <div><span class="ic">💼</span><b>Contratación</b><small>Perfiles técnicos y profesionales</small></div>
+        <div><span class="ic">📦</span><b>Proveedores</b><small>Bienes y servicios</small></div>
+        <div><span class="ic">🌱</span><b>Iniciativas</b><small>Apoyo a productores y mujeres</small></div>
+      </div>
+      <p class="sub" style="margin-top:28px">Mantente atento: te avisamos cuando abramos una</p>
+      <div class="hero-btns" id="avisameConv"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== DETALLE DE UNA CONVOCATORIA (convocatorias.html?c=CODIGO) ===== -->
+<section id="conDetalle" style="display:none">
+  <div class="wrap conv-detalle" id="detalleConv"></div>
+</section>
+
+<section style="padding-top:0" id="conListado">
+  <div class="wrap">
+    <div class="filtros">
+      <div class="tabs" id="tabs">
+        <button data-f="todas" class="on">Todas</button>
+        <button data-f="abierta">Abiertas</button>
+        <button data-f="proxima">Próximas</button>
+        <button data-f="evaluacion">En evaluación</button>
+        <button data-f="cerrada">Cerradas</button>
+      </div>
+      <div class="buscar">
+        <select id="fTipo"><option value="">Todos los tipos</option></select>
+        <input id="fTexto" type="search" placeholder="Buscar convocatoria…">
+      </div>
+    </div>
+    <div class="aviso-conv aviso-delgado" id="sinAbiertas" style="display:none;margin-top:30px"></div>
+    <div class="conv-grid" id="lista"></div>
+    <p class="vacio" id="vacio">No hay convocatorias que coincidan con tu búsqueda.</p>
+  </div>
+</section>
+
+<section class="bg-suave">
+  <div class="wrap">
+    <span class="eyebrow">¿Cómo participar?</span>
+    <h2 class="h2">Postúlate en cuatro pasos</h2>
+    <div class="pasos">
+      <div class="paso"><h4>Revisa los términos</h4><p>Descarga los términos de referencia y verifica requisitos, perfil y fechas.</p></div>
+      <div class="paso"><h4>Prepara tus documentos</h4><p>Hoja de vida o propuesta, RUT, cédula y los soportes que pida cada convocatoria.</p></div>
+      <div class="paso"><h4>Envía tu postulación</h4><p>Al correo indicado, con el código de la convocatoria en el asunto, antes del cierre.</p></div>
+      <div class="paso"><h4>Consulta resultados</h4><p>Publicamos los resultados en esta página y contactamos a las personas seleccionadas.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap" style="max-width:860px">
+    <div class="centro" style="margin-bottom:30px"><span class="eyebrow">Preguntas frecuentes</span><h2 class="h2">Resolvemos tus dudas</h2></div>
+    <details><summary>¿Las convocatorias tienen algún costo?</summary><p>No. La participación es gratuita. ADEL Catatumbo nunca solicita pagos para postularse.</p></details>
+    <details><summary>¿Puedo postularme a varias convocatorias?</summary><p>Sí, siempre que cumplas los requisitos de cada una y envíes una postulación independiente por convocatoria.</p></details>
+    <details><summary>¿Cómo sé si mi postulación fue recibida?</summary><p>Recibirás una confirmación por correo electrónico. Si no la recibes en 2 días hábiles, escríbenos.</p></details>
+    <details><summary>¿Dónde se publican los resultados?</summary><p>En esta misma página: la convocatoria pasa a “Cerrada” y aparece el botón con el documento de resultados.</p></details>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="alertas">
+      <div><h2 class="h2" style="margin-top:0">Recibe alertas de nuevas convocatorias</h2><p class="lead">Déjanos tu correo y te avisaremos cuando abramos un nuevo proceso.</p></div>
+      <form onsubmit="return suscribir(event)"><input type="email" name="correo" required placeholder="tu@correo.com"><button class="btn btn-teal" type="submit">Suscribirme</button></form>
+    </div>
+  </div>
+</section>
+
+<div id="pie"></div>
+<script src="datos/convocatorias.js"></script>
+<script src="datos/sitio.js"></script>
+<script src="datos/paginas.js"></script>
+<script src="datos/paginas-extra.js"></script>
+<script src="assets/js/componentes.js"></script>
+<script src="assets/js/carrito.js"></script>
+<script>
+const cod = param("c");
+const actual = cod && CONVOCATORIAS.find(x=>x.codigo===cod);
+if(actual){
+  const c = actual, d = diasPara(c.cierre);
+  document.title = c.codigo + " · " + c.titulo + " · ADEL Catatumbo";
+  document.querySelector(".banner .migas").innerHTML = `<a href="index.html">Inicio</a> / <a href="convocatorias.html">Convocatorias</a> / ${c.codigo}`;
+  document.querySelector(".banner .eyebrow").textContent = `${c.tipo} · ${c.codigo}`;
+  document.querySelector(".banner h1").textContent = c.titulo;
+  document.querySelector(".banner p").textContent = c.resumen;
+  ["conListado","sinConv"].forEach(id=>document.getElementById(id).style.display="none");
+  document.getElementById("conDetalle").style.display="block";
+  const estadoTxt = c.estado==="abierta" ? (d>=0?`Abierta · ${d===0?"cierra hoy":"quedan "+d+" días"}`:"Abierta")
+    : c.estado==="proxima" ? `Abre el ${fmtFecha(c.apertura)}` : ETQ_CONV[c.estado];
+  const horaTxt = c.hora_cierre && c.hora_cierre!=="23:59" ? ` a las ${c.hora_cierre}` : " a las 11:59 p.m.";
+  document.getElementById("detalleConv").innerHTML = `
+    <div class="cd-principal">
+      ${c.prorrogada?`<div class="aviso-prorroga"><b>Plazo ampliado.</b> Mediante adenda u otrosí, el cierre pasó del ${fmtFecha(c.cierre_original)} al ${fmtFecha(c.cierre)}.${c.prorroga_documento?` <a href="${c.prorroga_documento}" target="_blank" rel="noopener">Ver documento (PDF)</a>`:""}</div>`:""}
+      ${c.objeto?`<h2>Objeto</h2><p class="lead">${c.objeto}</p>`:""}
+      ${c.proyecto?`<h2>Proyecto</h2><p class="lead">${c.proyecto}${c.financiador?`<br><small>Financiado por: ${c.financiador}</small>`:""}</p>`:""}
+      ${c.cronograma?`<h2>Cronograma</h2><ol class="cronograma">${c.cronograma.map(x=>`<li><b>${x.actividad}</b><span>${x.fecha}</span></li>`).join("")}</ol>`:""}
+      ${c.requisitos?`<h2>Requisitos principales</h2><ul class="requisitos">${c.requisitos.map(r=>`<li>${r}</li>`).join("")}</ul><p class="nota-req">Consulta todos los requisitos y criterios de evaluación en los términos de referencia.</p>`:""}
+      <p style="margin-top:30px"><a class="btn btn-sec" href="convocatorias.html">← Volver a convocatorias</a></p>
+    </div>
+    <aside class="cd-lateral">
+      ${c.imagen?`<a href="${c.imagen}" target="_blank" rel="noopener" class="cd-img"><img src="${c.imagen}" alt="Pieza gráfica ${c.codigo}"></a>`:""}
+      <div class="ficha">
+        <dl>
+          <div><dt>Estado</dt><dd><span class="tag ${c.estado}">${estadoTxt}</span></dd></div>
+          <div><dt>Código</dt><dd>${c.codigo}</dd></div>
+          ${c.presupuesto?`<div><dt>Presupuesto</dt><dd>${c.presupuesto}</dd></div>`:""}
+          ${c.plazo?`<div><dt>Plazo de ejecución</dt><dd>${c.plazo}</dd></div>`:""}
+          <div><dt>Lugar</dt><dd>${c.lugar}</dd></div>
+          <div><dt>Publicación</dt><dd>${fmtFecha(c.apertura)}</dd></div>
+          <div><dt>Cierre</dt><dd>${fmtFecha(c.cierre)}${horaTxt}${c.prorrogada?`<br><small class="prorroga">Ampliado por adenda (cierre inicial: ${fmtFecha(c.cierre_original)})</small>`:""}</dd></div>
+          <div><dt>Envío de propuestas</dt><dd>${c.correo||correoVisible()}</dd></div>
+          ${c.entregaFisica?`<div><dt>Entrega física</dt><dd>${c.entregaFisica}</dd></div>`:""}
+          ${c.asunto?`<div><dt>Asunto del correo</dt><dd class="asunto">${c.asunto}</dd></div>`:""}
+        </dl>
+        <a class="btn btn-teal" style="width:100%;margin-top:20px" href="${c.terminos}" target="_blank" rel="noopener">Descargar términos (PDF)</a>
+        ${c.estado==="abierta"?`<a class="btn btn-verde" style="width:100%;margin-top:10px" href="${postularHref(c)}">Enviar propuesta</a>`:
+          c.estado==="proxima"?`<p class="cd-cerrada">La recepción de propuestas abre el ${fmtFecha(c.apertura)}.</p>`
+          :`<p class="cd-cerrada">El plazo para recibir propuestas terminó el ${fmtFecha(c.cierre)}${horaTxt.replace(/\.$/,"")}.${c.estado==="evaluacion"?" Las propuestas están en evaluación.":""}</p>`}
+      </div>
+    </aside>`;
+}
+else if(!CONVOCATORIAS.length){
+  document.getElementById("conListado").style.display="none";
+  document.getElementById("sinConv").style.display="block";
+  const txt=encodeURIComponent("Hola ADEL Catatumbo, quiero recibir aviso de las próximas convocatorias.");
+  document.getElementById("avisameConv").innerHTML=
+    `<a class="btn btn-verde" href="https://wa.me/${SITIO.whatsapp}?text=${txt}" target="_blank" rel="noopener">Avísame por WhatsApp</a>
+     <a class="btn btn-sec" href="mailto:${correoVisible()}?subject=${encodeURIComponent("Suscripción a convocatorias")}&body=${txt}">Avísame por correo</a>`;
+}
+if(!actual && CONVOCATORIAS.length && !CONVOCATORIAS.some(c=>c.estado==="abierta")){
+  const box=document.getElementById("sinAbiertas"); box.style.display="grid";
+  box.innerHTML=`<span class="ic-grande">📣</span><div><h3>No hay convocatorias abiertas en este momento</h3><p>Mantente atento: pronto publicaremos nuevas oportunidades. Abajo puedes consultar los procesos recientes.</p></div><a class="btn btn-verde" href="https://wa.me/${SITIO.whatsapp}?text=${encodeURIComponent('Hola ADEL Catatumbo, quiero recibir aviso de las próximas convocatorias.')}" target="_blank" rel="noopener">Avísame</a>`;
+}
+const tipos=[...new Set(CONVOCATORIAS.map(c=>c.tipo))];
+document.getElementById("fTipo").innerHTML += tipos.map(t=>`<option>${t}</option>`).join("");
+let filtro = param("estado") || "todas";
+function pintar(){
+  const txt=document.getElementById("fTexto").value.toLowerCase(), tipo=document.getElementById("fTipo").value;
+  const orden={abierta:0,proxima:1,evaluacion:2,cerrada:3};
+  const r=CONVOCATORIAS.filter(c=>filtro==="todas"||c.estado===filtro).filter(c=>!tipo||c.tipo===tipo)
+    .filter(c=>!txt||(c.titulo+c.resumen+c.codigo+c.lugar).toLowerCase().includes(txt))
+    .sort((a,b)=>orden[a.estado]-orden[b.estado]||(a.estado==="abierta"?a.cierre.localeCompare(b.cierre):b.cierre.localeCompare(a.cierre)));
+  document.getElementById("lista").innerHTML=r.map(tarjetaConvocatoria).join("");
+  document.getElementById("vacio").style.display=r.length?"none":"block";
+}
+document.querySelectorAll("#tabs button").forEach(b=>{
+  const n=b.dataset.f==="todas"?CONVOCATORIAS.length:CONVOCATORIAS.filter(c=>c.estado===b.dataset.f).length;
+  b.innerHTML+=` <span class="n">(${n})</span>`;
+  if(b.dataset.f==="proxima" && !n) b.style.display="none";
+  b.classList.toggle("on", b.dataset.f===filtro);
+  b.onclick=()=>{document.querySelectorAll("#tabs button").forEach(x=>x.classList.remove("on"));b.classList.add("on");filtro=b.dataset.f;pintar();};
+});
+document.getElementById("fTexto").oninput=pintar;
+document.getElementById("fTipo").onchange=pintar;
+pintar();
+</script>
+</body>
+</html>

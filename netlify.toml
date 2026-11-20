@@ -1,0 +1,23 @@
+# Configuración de Netlify · ADEL Catatumbo
+# En cada cambio guardado en GitHub (o desde el panel Pages CMS),
+# Netlify ejecuta el script que convierte datos/*.json en datos/*.js
+[build]
+  command = "node scripts/construir.js"
+  publish = "."
+
+# No publicar archivos internos
+[[redirects]]
+  from = "/scripts/*"
+  to = "/404.html"
+  status = 404
+  force = true
+[[redirects]]
+  from = "/.pages.yml"
+  to = "/404.html"
+  status = 404
+  force = true
+[[redirects]]
+  from = "/intranet/supabase/*"
+  to = "/404.html"
+  status = 404
+  force = true

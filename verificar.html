@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Verificar carta laboral · ADEL Catatumbo</title>
+<meta name="description" content="Verifique la autenticidad de una carta laboral expedida por ADEL Catatumbo.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="assets/img/favicon.png">
+<script src="assets/js/analitica.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/estilos.css">
+</head>
+<body data-pagina="verificar">
+<div id="encabezado"></div>
+<section class="banner">
+  <div class="rombo"></div>
+  <div class="wrap">
+    <div class="migas"><a href="index.html">Inicio</a> / Verificar carta laboral</div>
+    <span class="eyebrow">Verificación</span>
+    <h1>Verificar una carta laboral</h1>
+    <p>Escriba el código que aparece al final de la carta para confirmar que fue expedida por ADEL Catatumbo.</p>
+  </div>
+</section>
+<section>
+  <div class="wrap" style="max-width:720px">
+    <form id="fv" class="verif-form">
+      <input id="cod" placeholder="Ej.: ADEL-3F9A1C07B2" required maxlength="20" autocomplete="off" style="text-transform:uppercase">
+      <button class="btn btn-teal" type="submit">Verificar</button>
+    </form>
+    <div id="res"></div>
+  </div>
+</section>
+<div id="pie"></div>
+<script src="datos/convocatorias.js"></script>
+<script src="datos/sitio.js"></script>
+<script src="datos/paginas.js"></script>
+<script src="datos/paginas-extra.js"></script>
+<script src="assets/js/componentes.js"></script>
+<script src="https://unpkg.com/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="intranet/js/config.js"></script>
+<script src="intranet/js/datos.js"></script>
+<script>
+const TIPOS = { basica: "Carta laboral", salario: "Carta laboral con salario", funciones: "Carta laboral con funciones", retiro: "Certificación de retiro" };
+const res = document.getElementById("res");
+async function verificar(c){
+  c = c.trim().toUpperCase(); if(!c) return;
+  res.innerHTML = '<p style="margin-top:24px;color:var(--gris)">Verificando…</p>';
+  try {
+    const r = await Datos.verificarCarta(c);
+    res.innerHTML = r
+      ? `<div class="verif-res ok"><b>✓ Carta auténtica</b><dl><div><dt>Código</dt><dd>${esc(r.codigo)}</dd></div><div><dt>Documento</dt><dd>${esc(TIPOS[r.tipo] || "Carta laboral")}</dd></div><div><dt>Expedida a</dt><dd>${esc(r.nombre)}</dd></div><div><dt>Cargo</dt><dd>${esc(r.cargo)}</dd></div><div><dt>Fecha de expedición</dt><dd>${fmtFecha(r.fecha)}</dd></div></dl>
+         <p>Compare estos datos con los de la carta que recibió. Si no coinciden, la carta pudo ser alterada.</p></div>`
+      : `<div class="verif-res mal"><b>✗ No encontramos una carta con ese código</b><p>Revise que lo haya escrito igual que en la carta. Si el problema continúa, escríbanos a <a href="mailto:${esc(correoVisible())}">${esc(correoVisible())}</a>.</p></div>`;
+  } catch(e){ res.innerHTML = `<div class="verif-res mal"><b>No fue posible verificar en este momento.</b><p>${esc(e.message)}</p></div>`; }
+}
+document.getElementById("fv").onsubmit = e => { e.preventDefault(); history.replaceState(null, "", "?c=" + encodeURIComponent(document.getElementById("cod").value.trim().toUpperCase())); verificar(document.getElementById("cod").value); };
+const inicial = param("c"); if (inicial) { document.getElementById("cod").value = inicial; verificar(inicial); }
+</script>
+</body>
+</html>

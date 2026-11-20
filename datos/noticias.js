@@ -1,0 +1,56 @@
+/* ARCHIVO GENERADO AUTOMÁTICAMENTE desde datos/noticias.json — no editar aquí.
+   Edita el contenido en el panel (app.pagescms.org) o en el .json. */
+window.NOTICIAS = [
+ {
+  "publicado": true,
+  "id": "avanza-cebolla-ocanera",
+  "fecha": "2026-10-15",
+  "categoria": "Proyectos",
+  "titulo": "Avanza el proyecto Cebolla ocañera, raíz de paz",
+  "foto": "https://images.unsplash.com/photo-1633627388746-8cd271f7d526",
+  "resumen": "Productores de la provincia de Ocaña fortalecen sus capacidades con el acompañamiento de la ADEL y sus aliados.",
+  "texto": [
+   "Productores de cebolla de la provincia de Ocaña participan en las actividades del proyecto Cebolla ocañera, raíz de paz, que busca fortalecer la economía campesina del territorio.",
+   "Escribe aquí el desarrollo de la noticia: actividades realizadas, número de participantes, testimonios y próximos pasos."
+  ]
+ },
+ {
+  "publicado": true,
+  "id": "caficultores-calidad",
+  "fecha": "2026-09-28",
+  "categoria": "Café",
+  "titulo": "Caficultores del Catatumbo apuestan por la calidad",
+  "foto": "https://images.unsplash.com/photo-1672851613221-c56f31efce8c",
+  "resumen": "Familias productoras trabajan en buenas prácticas para llegar a mercados especiales.",
+  "texto": [
+   "Familias caficultoras de la región trabajan en buenas prácticas de cosecha y poscosecha para mejorar la calidad de su café.",
+   "Escribe aquí el desarrollo de la noticia."
+  ]
+ },
+ {
+  "publicado": true,
+  "id": "encuentro-red-adelco",
+  "fecha": "2026-09-10",
+  "categoria": "Red Adelco",
+  "titulo": "ADEL Catatumbo en el encuentro nacional de agencias",
+  "foto": "https://images.unsplash.com/photo-1631137697927-612f09b9684e",
+  "resumen": "Intercambio de experiencias en desarrollo económico local con las ADEL de Colombia.",
+  "texto": [
+   "La ADEL Catatumbo participó en el encuentro de la Red Nacional de Agencias de Desarrollo Local de Colombia – Red Adelco.",
+   "Escribe aquí el desarrollo de la noticia."
+  ]
+ },
+ {
+  "publicado": true,
+  "id": "red-mujeres-ferias",
+  "fecha": "2026-08-22",
+  "categoria": "Red de mujeres",
+  "titulo": "Emprendedoras del Catatumbo en ferias regionales",
+  "foto": "https://images.unsplash.com/photo-1633627346972-0f3dfa551171",
+  "resumen": "La Red de Mujeres lleva café, cacao y artesanías a nuevos mercados.",
+  "texto": [
+   "Integrantes de la Red de Mujeres del Catatumbo participaron en ferias regionales para dar a conocer sus productos.",
+   "Escribe aquí el desarrollo de la noticia."
+  ]
+ }
+];

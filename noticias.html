@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Noticias · ADEL Catatumbo</title>
+<meta name="description" content="Noticias de ADEL Catatumbo y del desarrollo económico local en la región del Catatumbo.">
+<link rel="icon" href="assets/img/favicon.png">
+<script src="assets/js/analitica.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/estilos.css">
+</head>
+<body data-pagina="noticias">
+<div id="encabezado"></div>
+
+<section class="banner">
+  <div class="foto"><img id="bannerFoto" src="https://images.unsplash.com/photo-1633627340121-a624e4d44b78?auto=format&fit=crop&w=2000&q=70" alt="" onerror="this.remove()"></div>
+  <div class="rombo"></div>
+  <div class="wrap">
+    <div class="migas" id="migas"><a href="index.html">Inicio</a> / Noticias</div>
+    <span class="eyebrow" id="etq">Noticias</span>
+    <h1 id="tit">Lo que está pasando en el territorio</h1>
+    <p id="txt">Actividades, logros y novedades de la agencia y de las comunidades del Catatumbo.</p>
+  </div>
+</section>
+
+<section id="vistaLista" style="padding-top:0">
+  <div class="wrap">
+    <div class="filtros"><div class="tabs" id="tabs"></div></div>
+    <div class="news" id="lista"></div>
+  </div>
+</section>
+
+<section id="vistaArticulo" style="display:none">
+  <div class="wrap"><article class="articulo" id="articulo"></article></div>
+</section>
+
+<div id="pie"></div>
+<script src="datos/convocatorias.js"></script>
+<script src="datos/noticias.js"></script>
+<script src="datos/sitio.js"></script>
+<script src="datos/paginas.js"></script>
+<script src="datos/paginas-extra.js"></script>
+<script src="assets/js/componentes.js"></script>
+<script src="assets/js/carrito.js"></script>
+<script>
+const orden=[...NOTICIAS].sort((a,b)=>b.fecha.localeCompare(a.fecha));
+const n = param("id") && NOTICIAS.find(x=>x.id===param("id"));
+if(n){
+  document.title=n.titulo+" · ADEL Catatumbo";
+  document.getElementById("vistaLista").style.display="none";
+  document.getElementById("vistaArticulo").style.display="block";
+  document.getElementById("migas").innerHTML=`<a href="index.html">Inicio</a> / <a href="noticias.html">Noticias</a> / ${n.categoria}`;
+  document.getElementById("etq").textContent=`${n.categoria} · ${fmtFecha(n.fecha)}`;
+  document.getElementById("tit").textContent=n.titulo;
+  document.getElementById("txt").textContent=n.resumen;
+  const otras=orden.filter(x=>x.id!==n.id).slice(0,3);
+  document.getElementById("articulo").innerHTML=`<div class="foto">${imgTag(n.foto,n.titulo,1400)}</div>
+    ${n.texto.map(t=>`<p>${t}</p>`).join("")}
+    <p><a class="btn btn-sec" href="noticias.html">← Volver a noticias</a></p>`;
+  document.getElementById("vistaArticulo").insertAdjacentHTML("afterend",
+    `<section class="bg-suave"><div class="wrap"><h2 class="h2">Otras noticias</h2><div class="news">${otras.map(tarjetaNoticia).join("")}</div></div></section>`);
+} else {
+  const cats=["Todas",...new Set(NOTICIAS.map(x=>x.categoria))];
+  const tabs=document.getElementById("tabs");
+  tabs.innerHTML=cats.map((c,i)=>`<button class="${i?'':'on'}" data-c="${c}">${c}</button>`).join("");
+  const pintar=c=>document.getElementById("lista").innerHTML=orden.filter(x=>c==="Todas"||x.categoria===c).map(tarjetaNoticia).join("");
+  tabs.onclick=e=>{const b=e.target.closest("button");if(!b)return;tabs.querySelectorAll("button").forEach(x=>x.classList.remove("on"));b.classList.add("on");pintar(b.dataset.c);};
+  pintar("Todas");
+}
+</script>
+</body>
+</html>

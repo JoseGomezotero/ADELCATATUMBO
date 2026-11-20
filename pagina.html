@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ADEL Catatumbo</title>
+<meta name="description" content="Agencia de Desarrollo Económico Local del Catatumbo.">
+<link rel="icon" href="assets/img/favicon.png">
+<script src="assets/js/analitica.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/estilos.css">
+</head>
+<!-- Plantilla de las PÁGINAS NUEVAS creadas en el panel (datos/paginas-extra.json).
+     Se abre como pagina.html?p=nombre-de-la-pagina -->
+<body data-pagina="extra">
+<div id="encabezado"></div>
+
+<section class="banner" id="bannerExtra">
+  <div class="foto"></div>
+  <div class="rombo"></div>
+  <div class="wrap">
+    <div class="migas" id="migas"><a href="index.html">Inicio</a></div>
+    <span class="eyebrow" id="etq"></span>
+    <h1 id="tit">Página no encontrada</h1>
+    <p id="txt">Puede que el enlace haya cambiado. <a href="index.html" style="color:#fff">Volver al inicio</a>.</p>
+  </div>
+</section>
+
+<div id="pie"></div>
+<script src="datos/convocatorias.js"></script>
+<script src="datos/sitio.js"></script>
+<script src="datos/paginas.js"></script>
+<script src="datos/paginas-extra.js"></script>
+<script src="assets/js/componentes.js"></script>
+<script src="assets/js/carrito.js"></script>
+<script>
+(function(){
+  const pg = (window.PAGINAS_EXTRA||[]).find(x => x.slug === param("p"));
+  if(!pg){ document.title = "Página no encontrada · ADEL Catatumbo"; return; }
+  document.title = `${sinMarcas(pg.titulo)} · ADEL Catatumbo`;
+  if(pg.descripcion) document.querySelector('meta[name="description"]').content = pg.descripcion;
+  document.getElementById("migas").innerHTML = `<a href="index.html">Inicio</a> / ${esc(sinMarcas(pg.titulo))}`;
+  document.getElementById("etq").textContent = pg.eyebrow || "";
+  document.getElementById("tit").innerHTML = resaltar(pg.titulo);
+  document.getElementById("txt").textContent = pg.texto || "";
+  const f = document.querySelector("#bannerExtra .foto");
+  if(pg.imagen) f.innerHTML = `<img src="${esc(foto(pg.imagen,2000))}" alt="" onerror="this.remove()">`;
+  pintarSecciones(pg.secciones, null, document.getElementById("pie"));
+})();
+</script>
+</body>
+</html>

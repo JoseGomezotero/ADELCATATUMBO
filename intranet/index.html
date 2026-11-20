@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Intranet · ADEL Catatumbo</title>
+<link rel="icon" href="../assets/img/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/intranet.css">
+</head>
+<body>
+<div class="ingreso">
+  <section class="ingreso-arte">
+    <a class="marca" href="../index.html" style="color:#fff;text-decoration:none"><img src="../assets/img/logo-adel-catatumbo.png" alt="ADEL Catatumbo"><div><b>ADEL Catatumbo</b><span>Intranet de trabajadores</span></div></a>
+    <div>
+      <h1>Sistema de gestión <em>interna</em></h1>
+      <p>Acceso exclusivo para el equipo de la agencia. Cada persona ve solo los módulos de su perfil.</p>
+      <ul>
+        <li><svg class="i" viewBox="0 0 24 24"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/></svg>Cartas laborales con código de verificación</li>
+        <li><svg class="i" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/></svg>Talento humano y hojas de vida</li>
+        <li><svg class="i" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/></svg>CRM de aliados y cooperantes</li>
+        <li><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg>Gestión de la página web</li>
+      </ul>
+    </div>
+    <small>Corporación Mixta ADEL Catatumbo · NIT 901.227.376-8</small>
+  </section>
+
+  <section class="ingreso-form">
+    <div class="caja">
+      <div id="vistaIngreso">
+        <h2>Bienvenido(a)</h2>
+        <p class="sub">Ingrese con su correo institucional o personal registrado.</p>
+        <div class="pestanas"><button class="activa" data-p="entrar">Ingresar</button><button data-p="registro">Crear cuenta</button></div>
+        <div id="msg"></div>
+
+        <form id="fEntrar" autocomplete="on">
+          <div class="campo"><label for="eCorreo">Correo</label><input id="eCorreo" type="email" required autocomplete="username"></div>
+          <div class="campo"><label for="eClave">Contraseña</label><input id="eClave" type="password" required autocomplete="current-password"></div>
+          <button class="bt bt-pri" style="width:100%" type="submit">Ingresar</button>
+          <p style="text-align:center;margin-top:14px"><button class="bt bt-txt" type="button" id="olvide">¿Olvidó su contraseña?</button></p>
+        </form>
+
+        <form id="fRegistro" class="oculto" autocomplete="on">
+          <div class="campo"><label for="rNombre">Nombre completo</label><input id="rNombre" required autocomplete="name"></div>
+          <div class="campo"><label for="rCorreo">Correo</label><input id="rCorreo" type="email" required autocomplete="email"></div>
+          <div class="campo"><label for="rClave">Contraseña</label><input id="rClave" type="password" minlength="8" required autocomplete="new-password"><span class="ayuda">Mínimo 8 caracteres.</span></div>
+          <button class="bt bt-pri" style="width:100%" type="submit">Crear cuenta</button>
+          <p class="ayuda" style="font-size:.8rem;color:var(--gris);margin-top:12px">Después de crearla, el administrador debe activarla y asignarle su perfil antes de poder ingresar.</p>
+        </form>
+
+        <form id="fRecuperar" class="oculto">
+          <p class="sub">Escriba su correo y le enviaremos un enlace para crear una nueva contraseña.</p>
+          <div class="campo"><label for="pCorreo">Correo</label><input id="pCorreo" type="email" required></div>
+          <button class="bt bt-pri" style="width:100%" type="submit">Enviar enlace</button>
+          <p style="text-align:center;margin-top:14px"><button class="bt bt-txt" type="button" data-p="entrar">← Volver</button></p>
+        </form>
+
+        <form id="fNueva" class="oculto">
+          <p class="sub">Escriba su nueva contraseña.</p>
+          <div class="campo"><label for="nClave">Nueva contraseña</label><input id="nClave" type="password" minlength="8" required autocomplete="new-password"></div>
+          <button class="bt bt-pri" style="width:100%" type="submit">Guardar contraseña</button>
+        </form>
+
+        <div class="msg msg-info oculto" id="sinConexion"></div>
+      </div>
+      <a class="volver" href="../index.html">← Volver al sitio web</a>
+    </div>
+  </section>
+</div>
+
+<script src="https://unpkg.com/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="js/config.js"></script>
+<script src="js/datos.js"></script>
+<script>
+const $ = s => document.querySelector(s);
+const msg = (t, tipo = "error") => $("#msg").innerHTML = t ? `<div class="msg msg-${tipo}">${t}</div>` : "";
+function vista(p){
+  ["fEntrar","fRegistro","fRecuperar","fNueva"].forEach(id => $("#"+id).classList.add("oculto"));
+  $({entrar:"#fEntrar",registro:"#fRegistro",recuperar:"#fRecuperar",nueva:"#fNueva"}[p]).classList.remove("oculto");
+  document.querySelectorAll(".pestanas button").forEach(b => b.classList.toggle("activa", b.dataset.p === p));
+  $(".pestanas").classList.toggle("oculto", p === "recuperar" || p === "nueva");
+  msg("");
+}
+document.querySelectorAll("[data-p]").forEach(b => b.onclick = () => vista(b.dataset.p));
+$("#olvide").onclick = () => vista("recuperar");
+
+async function ocupado(form, fn){
+  const b = form.querySelector("button[type=submit]"); const t = b.textContent;
+  b.disabled = true; b.textContent = "Un momento…";
+  try { await fn(); } catch(e){ msg(e.message); } finally { b.disabled = false; b.textContent = t; }
+}
+$("#fEntrar").onsubmit = e => { e.preventDefault(); ocupado(e.target, async () => {
+  await Datos.iniciar($("#eCorreo").value, $("#eClave").value); location.href = "app.html"; }); };
+$("#fRegistro").onsubmit = e => { e.preventDefault(); ocupado(e.target, async () => {
+  await Datos.registrar($("#rNombre").value, $("#rCorreo").value, $("#rClave").value);
+  vista("entrar");
+  msg("Cuenta creada. Revise su correo para confirmarla. Luego el administrador debe activarla y asignarle un perfil.", "ok"); }); };
+$("#fRecuperar").onsubmit = e => { e.preventDefault(); ocupado(e.target, async () => {
+  await Datos.recuperar($("#pCorreo").value);
+  vista("entrar"); msg("Si el correo está registrado, recibirá un enlace para cambiar su contraseña.", "ok"); }); };
+$("#fNueva").onsubmit = e => { e.preventDefault(); ocupado(e.target, async () => {
+  await Datos.cambiarClave($("#nClave").value); location.href = "app.html"; }); };
+Datos.enRecuperacion(() => vista("nueva"));
+
+if (Datos.modo === "sin-conexion") {
+  $("#sinConexion").innerHTML = "<b>Intranet en configuración.</b><br>" + Datos.motivo;
+  $("#sinConexion").classList.remove("oculto");
+  document.querySelectorAll("#vistaIngreso form button, #vistaIngreso form input").forEach(el => el.disabled = true);
+}
+Datos.perfil().then(p => { if (p && !p.pendiente && !/nueva=1/.test(location.search)) location.href = "app.html"; }).catch(()=>{});
+</script>
+</body>
+</html>

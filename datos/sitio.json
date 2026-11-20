@@ -1,0 +1,41 @@
+{
+  "nombre_corto": "ADEL Catatumbo",
+  "razon_social": "Corporación Mixta Agencia de Desarrollo Económico Local del Norte de Santander «ADEL Catatumbo con enfoque de frontera»",
+  "nit": "901.227.376-8",
+  "naturaleza": "Entidad sin ánimo de lucro (ESAL), corporación mixta constituida por entidades territoriales públicas y privadas",
+  "correo_institucional": "",
+  "correo": "catatumbosistemasadel@gmail.com",
+  "telefono": "+57 300 377 2153",
+  "whatsapp": "573003772153",
+  "direccion": "Calle 6 # 16-41, Ocaña, Norte de Santander",
+  "facebook": "#",
+  "instagram": "https://www.instagram.com/adelcatatumbo_7/",
+  "youtube": "#",
+  "tiendaAbierta": false,
+  "entregas": [
+    {
+      "id": "sede",
+      "nombre": "Recoger en la sede",
+      "detalle": "Calle 6 # 16-41, Ocaña",
+      "costo": 0
+    },
+    {
+      "id": "ocana",
+      "nombre": "Domicilio en Ocaña",
+      "detalle": "Entrega en 24 a 48 horas",
+      "costo": 5000
+    },
+    {
+      "id": "regional",
+      "nombre": "Envío a otro municipio",
+      "detalle": "Costo se confirma por WhatsApp",
+      "costo": 0
+    }
+  ],
+  "pagos": [
+    "Efectivo contra entrega",
+    "Transferencia bancaria",
+    "Nequi",
+    "Daviplata"
+  ]
+}

@@ -1,0 +1,42 @@
+# =========================================================
+#  PUBLICAR SITIO · ADEL Catatumbo
+#  Pasa todos los cambios de la rama "edicion" (donde trabaja el panel)
+#  a la rama "main" (la que Netlify publica en adelcatatumbo.org).
+#  Se ejecuta con el botón «🚀 Publicar» del panel Pages CMS
+#  o desde GitHub → pestaña Actions → "Publicar sitio" → Run workflow.
+# =========================================================
+name: Publicar sitio
+on:
+  workflow_dispatch:
+    inputs:
+      payload:
+        description: "Datos que envía Pages CMS (no se usan)"
+        required: false
+        default: "{}"
+permissions:
+  contents: write
+concurrency:
+  group: publicar
+  cancel-in-progress: false
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - name: Revisar que los datos no tengan errores
+        run: |
+          git fetch origin edicion
+          for f in $(git ls-tree -r --name-only origin/edicion datos/ | grep '\.json$'); do
+            git show "origin/edicion:$f" | node -e 'JSON.parse(require("fs").readFileSync(0,"utf8"))' \
+              || { echo "::error::El archivo $f tiene un error. No se publicó nada."; exit 1; }
+          done
+      - name: Pasar edicion → main
+        run: |
+          git config user.name "Panel ADEL Catatumbo"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git merge --no-edit origin/edicion -m "Publicar cambios del panel"
+          git push origin main
+          git push origin main:edicion

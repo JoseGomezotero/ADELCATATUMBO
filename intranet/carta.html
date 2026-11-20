@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Carta laboral · ADEL Catatumbo</title>
+<link rel="icon" href="../assets/img/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  @page{size:Letter;margin:0}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:#e9eeef;font-family:Inter,Arial,sans-serif;color:#1d2b30}
+  .herr{position:sticky;top:0;background:#1f3b42;color:#fff;padding:10px 18px;display:flex;gap:10px;align-items:center;z-index:5}
+  .herr span{font-size:.9rem;opacity:.85}
+  .herr button,.herr a{margin-left:auto;background:#6d9243;color:#fff;border:none;border-radius:8px;padding:9px 16px;font-weight:600;cursor:pointer;font-size:.9rem;text-decoration:none}
+  .herr a{margin-left:0;background:transparent;border:1px solid rgba(255,255,255,.4)}
+  .hoja{width:216mm;min-height:279mm;margin:24px auto;background:#fff;box-shadow:0 10px 30px rgba(0,0,0,.12);padding:22mm 24mm 18mm;position:relative;display:flex;flex-direction:column}
+  .membrete{display:flex;gap:16px;align-items:center;padding-bottom:12px;border-bottom:3px solid #449890}
+  .membrete img{height:68px}
+  .membrete .rs{font-family:"Plus Jakarta Sans",Arial,sans-serif;font-weight:800;color:#1f3b42;font-size:10.5pt;line-height:1.3}
+  .membrete .nit{font-size:9pt;color:#5b6a70;margin-top:3px}
+  .cuerpo{flex:1;font-size:11.5pt;line-height:1.75;text-align:justify;padding-top:14mm}
+  .cuerpo .lugar{text-align:left;margin-bottom:10mm}
+  .cuerpo h1{text-align:center;font-family:"Plus Jakarta Sans",Arial,sans-serif;font-size:13pt;letter-spacing:.06em;margin:4mm 0 2mm;color:#1f3b42}
+  .cuerpo h2{text-align:center;font-size:12pt;letter-spacing:.3em;margin:6mm 0 6mm;color:#1f3b42}
+  .cuerpo p{margin-bottom:5mm}
+  .cuerpo ul{margin:0 0 5mm 8mm}
+  .cuerpo li{margin-bottom:1mm}
+  .firma{margin-top:16mm}
+  .firma .linea{width:75mm;border-top:1px solid #1d2b30;margin-bottom:2mm;margin-top:18mm}
+  .firma b{display:block;font-size:11pt}
+  .firma span{font-size:10pt;color:#3b4a50}
+  .verif{margin-top:10mm;display:flex;gap:12px;align-items:center;border:1px dashed #b8c6c9;border-radius:8px;padding:8px 12px;font-size:8.5pt;color:#3b4a50}
+  .verif b{font-family:monospace;font-size:10.5pt;color:#1f3b42;letter-spacing:.05em}
+  .pie{border-top:1px solid #dfe7e7;margin-top:8mm;padding-top:3mm;font-size:8pt;color:#5b6a70;text-align:center}
+  .marca-agua{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none;font-size:70pt;font-weight:800;color:rgba(192,57,43,.09);transform:rotate(-30deg)}
+  .error{max-width:520px;margin:80px auto;background:#fff;padding:30px;border-radius:12px;text-align:center}
+  @media print{body{background:#fff}.herr{display:none}.hoja{margin:0;box-shadow:none;width:auto;min-height:100vh}}
+  @media (max-width:860px){.hoja{width:auto;margin:0;padding:12mm 8mm;min-height:0}}
+</style>
+</head>
+<body>
+<div class="herr" id="herr"><span id="estadoTxt">Cargando…</span><a href="app.html#/mis-cartas">← Intranet</a><button onclick="window.print()">Imprimir / Guardar PDF</button></div>
+<div id="hoja"></div>
+<script src="https://unpkg.com/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="js/config.js"></script>
+<script src="js/datos.js"></script>
+<script src="js/letras.js"></script>
+<script src="../datos/sitio.js"></script>
+<script>
+(async () => {
+  const C = window.INTRANET, esc = t => String(t ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+  const MESES = ["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
+  const larga = d => { const x = new Date(String(d).slice(0,10) + "T12:00:00"); return `${x.getDate()} de ${MESES[x.getMonth()]} de ${x.getFullYear()}`; };
+  const error = t => { document.getElementById("hoja").innerHTML = `<div class="error"><h3>No se puede mostrar la carta</h3><p style="margin-top:10px;color:#5b6a70">${t}</p></div>`; document.getElementById("estadoTxt").textContent = ""; };
+  const yo = await Datos.perfil().catch(() => null);
+  if (!yo || yo.pendiente) return location.replace("index.html");
+  const id = new URLSearchParams(location.search).get("id");
+  const c = id ? await Datos.obtener("cartas", id).catch(() => null) : null;
+  if (!c) return error("La carta no existe o su perfil no tiene permiso para verla.");
+  if (c.estado !== "aprobada" || !c.contenido) return error("La carta aún no ha sido aprobada por Talento Humano.");
+
+  const e = c.contenido, F = e.genero === "F", M = e.genero === "M";
+  const g = (f, m, n) => F ? f : M ? m : n;
+  const servicios = e.tipo_contrato === "Prestación de servicios";
+  const retirado = c.tipo === "retiro" || e.estado === "retirado" || !!e.fecha_retiro;
+  const doc = { CC: "cédula de ciudadanía", CE: "cédula de extranjería", PPT: "permiso por protección temporal", PA: "pasaporte", TI: "tarjeta de identidad" }[e.tipo_doc] || "documento";
+  const contrato = servicios ? "contrato de prestación de servicios" : `contrato de trabajo a ${String(e.tipo_contrato).toLowerCase()}`;
+  const persona = `${g("la señora", "el señor", "el(la) señor(a)")} <b>${esc(String(e.nombre).toUpperCase())}</b>, ${g("identificada", "identificado", "identificado(a)")} con ${doc} No. <b>${esc(Number(e.documento) ? Number(e.documento).toLocaleString("es-CO") : e.documento)}</b>${e.expedida_en ? " expedida en " + esc(e.expedida_en) : ""}`;
+  let p1;
+  if (retirado) p1 = `Que ${persona}, ${servicios ? "prestó sus servicios a" : "laboró en"} esta corporación desde el <b>${larga(e.fecha_ingreso)}</b> hasta el <b>${larga(e.fecha_retiro || c.fecha_respuesta)}</b>, desempeñando el cargo de <b>${esc(e.cargo)}</b>, mediante ${contrato}.`;
+  else p1 = `Que ${persona}, ${servicios ? "presta sus servicios a" : "labora en"} esta corporación desde el <b>${larga(e.fecha_ingreso)}</b> hasta la fecha, desempeñando el cargo de <b>${esc(e.cargo)}</b>, mediante ${contrato}.`;
+  let extra = "";
+  if (c.tipo === "salario" && e.salario) {
+    const frase = servicios ? (retirado ? "sus últimos honorarios mensuales fueron" : "sus honorarios mensuales son") : (retirado ? "su último salario mensual fue" : "su salario mensual es");
+    extra += `<p>Que ${frase} de <b>${esc(numeroALetras(e.salario))} PESOS M/CTE ($${Number(e.salario).toLocaleString("es-CO")})</b>.</p>`;
+  }
+  if (c.tipo === "funciones" && e.funciones) extra += `<p>Que entre sus funciones ${retirado ? "estuvieron" : "se encuentran"}:</p><ul>${e.funciones.split(/\n+/).map(x => x.trim().replace(/^[-•*]\s*/, "")).filter(Boolean).map(x => `<li>${esc(x)}</li>`).join("")}</ul>`;
+  const f = new Date(c.fecha_respuesta);
+  const dia = f.getDate();
+  const urlVer = `${C.sitio || location.origin}/verificar.html?c=${encodeURIComponent(c.codigo)}`;
+  document.title = `Carta laboral ${e.nombre} · ${c.codigo}`;
+  document.getElementById("estadoTxt").textContent = `Carta aprobada · Código ${c.codigo}`;
+  document.getElementById("hoja").innerHTML = `<div class="hoja">
+    <div class="membrete"><img src="../assets/img/logo-adel-catatumbo.png" alt=""><div><div class="rs">${esc(C.razonSocial)}</div><div class="nit">NIT ${esc(C.nit)}</div></div></div>
+    <div class="cuerpo">
+      <p class="lugar">${esc(C.ciudad.split(" (")[0])}, ${larga(c.fecha_respuesta)}</p>
+      <h1>EL(LA) SUSCRITO(A) ${esc(C.firmante.cargo.toUpperCase())}<br>DE ADEL CATATUMBO</h1>
+      <h2>CERTIFICA</h2>
+      <p>${p1}</p>
+      ${extra}
+      <p>La presente certificación se expide a solicitud ${g("de la interesada", "del interesado", "del (la) interesado(a)")}, con destino a <b>${esc(c.dirigida_a)}</b>, en ${esc(C.ciudad)}, ${dia === 1 ? "al primer (1) día" : `a los ${numeroALetras(dia).replace(/VEINTIUNO$/, "VEINTIÚN").replace(/UNO$/, "UN").toLowerCase()} (${dia}) días`} del mes de ${MESES[f.getMonth()]} de ${f.getFullYear()}.</p>
+      <div class="firma"><div class="linea"></div><b>${esc(C.firmante.nombre)}</b><span>${esc(C.firmante.cargo)}<br>ADEL Catatumbo</span></div>
+      <div class="verif"><div>Código de verificación<br><b>${esc(c.codigo)}</b></div><div>Verifique la autenticidad de esta carta en<br>${esc(urlVer.replace(/^https?:\/\//, ""))}</div></div>
+    </div>
+    <div class="pie">${esc((window.SITIO_CMS && SITIO_CMS.direccion) || "Ocaña, Norte de Santander")} · ${esc(C.sitio.replace(/^https?:\/\//, ""))}</div>
+  </div>`;
+})();
+</script>
+</body>
+</html>

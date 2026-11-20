@@ -1,0 +1,1502 @@
+# =========================================================
+#  PANEL DE ADMINISTRACIÓN · ADEL Catatumbo  (Pages CMS)
+#  Entrar en: https://app.pagescms.org  → repositorio del sitio
+#  Cada vez que se guarda un cambio, Netlify publica el sitio solo
+#  (tarda 1 a 2 minutos).
+#  Este archivo define QUÉ se puede editar en el panel.
+#  Solo el administrador debe modificarlo.
+# =========================================================
+
+
+media:
+  input: archivos
+  output: /archivos
+content:
+- name: convocatorias
+  label: 📢 Convocatorias
+  type: file
+  path: datos/convocatorias.json
+  format: json
+  list: true
+  fields:
+  - name: publicado
+    label: Publicada en el sitio
+    type: boolean
+    default: true
+    description: Desactívala para guardarla como borrador.
+  - name: codigo
+    label: Código
+    type: string
+    required: true
+    description: 'Ej: ADEL-PRO-004-2026 (sin espacios; se usa en el enlace)'
+  - name: titulo
+    label: Título
+    type: string
+    required: true
+  - name: tipo
+    label: Tipo
+    type: select
+    options:
+      values:
+      - Contratación
+      - Proveedores
+      - Consultoría
+      - Apoyo a iniciativas
+  - name: estado
+    label: Estado
+    type: select
+    default: auto
+    description: 'Déjelo en «Automático»: el sitio cambia solo a En evaluación al pasar el cierre y a Cerrada al terminar
+      la evaluación. Use las otras opciones solo para forzar un estado (por ejemplo, si se declara desierta o se suspende).'
+    options:
+      values:
+      - value: auto
+        label: Automático según fechas (recomendado)
+      - value: abierta
+        label: 'Forzar: Abierta'
+      - value: evaluacion
+        label: 'Forzar: En evaluación'
+      - value: cerrada
+        label: 'Forzar: Cerrada'
+  - name: apertura
+    label: Fecha de apertura
+    type: date
+    options:
+      format: yyyy-MM-dd
+  - name: cierre
+    label: Fecha de cierre
+    type: date
+    options:
+      format: yyyy-MM-dd
+  - name: hora_cierre
+    label: Hora de cierre (24 h)
+    type: string
+    default: '23:59'
+    description: 'Ej.: 23:59 = 11:59 p.m. · 17:00 = 5:00 p.m.'
+  - name: fin_evaluacion
+    label: Fin de la evaluación (comunicación de resultados)
+    type: date
+    options:
+      format: yyyy-MM-dd
+    description: Hasta esta fecha se muestra «En evaluación»; después pasa a «Cerrada». Si se deja vacío, se usan 7 días después
+      del cierre.
+  - name: prorroga
+    label: Nuevo cierre por adenda u otrosí
+    type: date
+    options:
+      format: yyyy-MM-dd
+    description: Solo si se amplía el plazo. La convocatoria sigue abierta hasta esta fecha y el sitio muestra el aviso de
+      ampliación.
+  - name: prorroga_documento
+    label: Adenda u otrosí (PDF)
+    type: file
+  - name: lugar
+    label: Lugar
+    type: string
+  - name: resumen
+    label: Resumen corto (tarjeta)
+    type: text
+  - name: imagen
+    label: Imagen o afiche
+    type: image
+  - name: terminos
+    label: Términos de referencia (PDF)
+    type: file
+  - name: resultados
+    label: Resultados (PDF, al cerrar)
+    type: file
+  - name: objeto
+    label: Objeto
+    type: text
+  - name: proyecto
+    label: Proyecto
+    type: string
+  - name: financiador
+    label: Financiador
+    type: string
+  - name: presupuesto
+    label: Presupuesto
+    type: string
+  - name: plazo
+    label: Plazo
+    type: string
+  - name: correo
+    label: Correo para recibir propuestas
+    type: string
+  - name: asunto
+    label: Asunto del correo
+    type: string
+  - name: entregaFisica
+    label: Entrega física
+    type: string
+  - name: requisitos
+    label: Requisitos
+    type: string
+    list: true
+  - name: cronograma
+    label: Cronograma
+    type: object
+    list: true
+    fields:
+    - name: actividad
+      label: Actividad
+      type: string
+    - name: fecha
+      label: Fecha (texto libre)
+      type: string
+- name: noticias
+  label: 📰 Noticias
+  type: file
+  path: datos/noticias.json
+  format: json
+  list: true
+  fields:
+  - name: publicado
+    label: Publicada en el sitio
+    type: boolean
+    default: true
+  - name: id
+    label: Identificador
+    type: string
+    required: true
+    description: 'Palabras en minúscula separadas por guiones, sin tildes. Ej: feria-campesina-ocana'
+  - name: fecha
+    label: Fecha
+    type: date
+    options:
+      format: yyyy-MM-dd
+  - name: categoria
+    label: Categoría
+    type: string
+    description: 'Ej: Proyectos, Café, Red Adelco, Red de mujeres (si escribes una nueva aparece sola en los filtros)'
+  - name: titulo
+    label: Título
+    type: string
+    required: true
+  - name: foto
+    label: Foto principal
+    type: image
+  - name: resumen
+    label: Resumen
+    type: text
+  - name: texto
+    label: Párrafos
+    type: text
+    list: true
+- name: proyectos
+  label: 🌱 Proyectos
+  type: file
+  path: datos/proyectos.json
+  format: json
+  list: true
+  fields:
+  - name: publicado
+    label: Publicado en el sitio
+    type: boolean
+    default: true
+  - name: id
+    label: Identificador
+    type: string
+    required: true
+    description: 'Minúsculas y guiones, sin tildes. Ej: cafe-especial'
+  - name: titulo
+    label: Título
+    type: string
+    required: true
+  - name: estado
+    label: Estado
+    type: select
+    options:
+      values:
+      - value: ejecucion
+        label: En ejecución
+      - value: finalizado
+        label: Finalizado
+  - name: destacado
+    label: Mostrar en la página de inicio
+    type: boolean
+  - name: linea
+    label: Línea
+    type: string
+  - name: municipios
+    label: Municipios
+    type: string
+  - name: periodo
+    label: Periodo
+    type: string
+  - name: financiador
+    label: Financiador
+    type: string
+  - name: socios
+    label: Socios
+    type: string
+  - name: foto
+    label: Foto
+    type: image
+  - name: resumen
+    label: Resumen
+    type: text
+  - name: descripcion
+    label: Descripción (párrafos)
+    type: text
+    list: true
+  - name: objetivos
+    label: Objetivos
+    type: string
+    list: true
+- name: productos
+  label: 🛒 Tienda · Productos
+  type: file
+  path: datos/productos.json
+  format: json
+  list: true
+  fields:
+  - name: publicado
+    label: Publicado en el sitio
+    type: boolean
+    default: true
+  - name: id
+    label: Identificador
+    type: string
+    required: true
+    description: 'Minúsculas y guiones. Ej: kit-familiar'
+  - name: nombre
+    label: Nombre
+    type: string
+    required: true
+  - name: categoria
+    label: Categoría
+    type: string
+    description: Kits de mercado, Café, Hortalizas y cebolla, Cacao, Artesanías…
+  - name: precio
+    label: Precio (pesos, sin puntos)
+    type: number
+  - name: unidad
+    label: Unidad
+    type: string
+    description: kit, libra 500 g, atado 1 kg…
+  - name: productor
+    label: Productor
+    type: string
+  - name: descripcion
+    label: Descripción
+    type: text
+  - name: contenido
+    label: Contenido (solo kits)
+    type: string
+    list: true
+  - name: foto
+    label: Foto
+    type: image
+  - name: disponible
+    label: Disponible (desactivado = Agotado)
+    type: boolean
+    default: true
+  - name: destacado
+    label: Destacado
+    type: boolean
+- name: paginas
+  label: 📄 Textos y secciones de las páginas
+  type: file
+  path: datos/paginas.json
+  format: json
+  fields:
+  - name: inicio
+    label: Inicio
+    type: object
+    fields:
+    - name: eyebrow
+      label: Texto pequeño sobre el título
+      type: string
+    - name: titulo
+      label: Título grande
+      type: string
+      description: 'Encierra una palabra entre asteriscos para resaltarla en verde. Ej: Oportunidades que nacen del *Catatumbo*'
+    - name: texto
+      label: Texto bajo el título
+      type: text
+    - name: imagen
+      label: Foto de fondo
+      type: image
+      description: Foto horizontal, mínimo 1600 px de ancho y máximo 1 MB.
+    - name: secciones
+      label: Secciones nuevas
+      type: object
+      list: true
+      fields:
+      - name: tipo
+        label: Tipo de sección
+        type: select
+        required: true
+        default: texto
+        options:
+          values:
+          - value: texto
+            label: Texto (con imagen ancha opcional)
+          - value: texto_imagen
+            label: Texto + imagen al lado
+          - value: tarjetas
+            label: Tarjetas (servicios, aliados, logros…)
+          - value: galeria
+            label: Galería de fotos
+          - value: video
+            label: Video de YouTube
+          - value: llamado
+            label: Franja de llamado a la acción
+      - name: visible
+        label: Mostrar en el sitio
+        type: boolean
+        default: true
+      - name: ubicacion
+        label: ¿Dónde aparece?
+        type: select
+        default: final
+        options:
+          values:
+          - value: inicio
+            label: Justo después del encabezado
+          - value: final
+            label: Al final de la página (antes del pie)
+      - name: fondo
+        label: Color de fondo
+        type: select
+        default: blanco
+        options:
+          values:
+          - value: blanco
+            label: Blanco
+          - value: suave
+            label: Gris suave
+          - value: oscuro
+            label: Azul pizarra (texto blanco)
+          - value: verde
+            label: Verde ADEL (texto blanco)
+      - name: eyebrow
+        label: Texto pequeño sobre el título
+        type: string
+      - name: titulo
+        label: Título
+        type: string
+        description: 'Encierra una palabra entre asteriscos para resaltarla. Ej: Nuestros *aliados*'
+      - name: texto
+        label: Texto
+        type: rich-text
+      - name: imagen
+        label: Imagen
+        type: image
+        description: Para los tipos «Texto» y «Texto + imagen al lado». Sube fotos JPG de máximo 1 MB.
+      - name: lado_imagen
+        label: Lado de la imagen
+        type: select
+        default: derecha
+        description: Solo para «Texto + imagen al lado».
+        options:
+          values:
+          - derecha
+          - izquierda
+      - name: tarjetas
+        label: Tarjetas
+        type: object
+        list: true
+        description: Solo para el tipo «Tarjetas».
+        fields:
+        - name: titulo
+          label: Título
+          type: string
+        - name: texto
+          label: Texto corto
+          type: text
+        - name: imagen
+          label: Imagen
+          type: image
+        - name: enlace
+          label: Enlace (opcional)
+          type: string
+      - name: galeria
+        label: Fotos de la galería
+        type: image
+        list: true
+        description: Solo para el tipo «Galería de fotos».
+      - name: video
+        label: Enlace del video de YouTube
+        type: string
+        description: 'Solo para el tipo «Video». Ej: https://www.youtube.com/watch?v=XXXXXXXXXXX'
+      - name: boton_texto
+        label: Texto del botón (opcional)
+        type: string
+      - name: boton_enlace
+        label: Enlace del botón
+        type: string
+        description: Página del sitio (ej. contacto.html) o dirección completa (https://…)
+      - name: ancla
+        label: Identificador (opcional)
+        type: string
+        description: 'Una palabra sin espacios para poder enlazar la sección. Ej: aliados → index.html#aliados'
+  - name: quienes_somos
+    label: Quiénes somos
+    type: object
+    fields:
+    - name: eyebrow
+      label: Texto pequeño sobre el título
+      type: string
+    - name: titulo
+      label: Título grande
+      type: string
+      description: 'Encierra una palabra entre asteriscos para resaltarla en verde. Ej: Oportunidades que nacen del *Catatumbo*'
+    - name: texto
+      label: Texto bajo el título
+      type: text
+    - name: imagen
+      label: Foto de fondo
+      type: image
+      description: Foto horizontal, mínimo 1600 px de ancho y máximo 1 MB.
+    - name: quienes
+      label: ¿Quiénes somos? (primer párrafo)
+      type: text
+    - name: quienes2
+      label: ¿Quiénes somos? (segundo párrafo)
+      type: text
+    - name: mision
+      label: Misión
+      type: text
+    - name: vision
+      label: Visión 2030
+      type: text
+    - name: buscamos
+      label: ¿Qué buscamos?
+      type: text
+    - name: objetivo
+      label: ¿Con qué objetivo?
+      type: text
+    - name: recurso
+      label: Recurso humano (texto del equipo)
+      type: text
+    - name: secciones
+      label: Secciones nuevas
+      type: object
+      list: true
+      fields:
+      - name: tipo
+        label: Tipo de sección
+        type: select
+        required: true
+        default: texto
+        options:
+          values:
+          - value: texto
+            label: Texto (con imagen ancha opcional)
+          - value: texto_imagen
+            label: Texto + imagen al lado
+          - value: tarjetas
+            label: Tarjetas (servicios, aliados, logros…)
+          - value: galeria
+            label: Galería de fotos
+          - value: video
+            label: Video de YouTube
+          - value: llamado
+            label: Franja de llamado a la acción
+      - name: visible
+        label: Mostrar en el sitio
+        type: boolean
+        default: true
+      - name: ubicacion
+        label: ¿Dónde aparece?
+        type: select
+        default: final
+        options:
+          values:
+          - value: inicio
+            label: Justo después del encabezado
+          - value: final
+            label: Al final de la página (antes del pie)
+      - name: fondo
+        label: Color de fondo
+        type: select
+        default: blanco
+        options:
+          values:
+          - value: blanco
+            label: Blanco
+          - value: suave
+            label: Gris suave
+          - value: oscuro
+            label: Azul pizarra (texto blanco)
+          - value: verde
+            label: Verde ADEL (texto blanco)
+      - name: eyebrow
+        label: Texto pequeño sobre el título
+        type: string
+      - name: titulo
+        label: Título
+        type: string
+        description: 'Encierra una palabra entre asteriscos para resaltarla. Ej: Nuestros *aliados*'
+      - name: texto
+        label: Texto
+        type: rich-text
+      - name: imagen
+        label: Imagen
+        type: image
+        description: Para los tipos «Texto» y «Texto + imagen al lado». Sube fotos JPG de máximo 1 MB.
+      - name: lado_imagen
+        label: Lado de la imagen
+        type: select
+        default: derecha
+        description: Solo para «Texto + imagen al lado».
+        options:
+          values:
+          - derecha
+          - izquierda
+      - name: tarjetas
+        label: Tarjetas
+        type: object
+        list: true
+        description: Solo para el tipo «Tarjetas».
+        fields:
+        - name: titulo
+          label: Título
+          type: string
+        - name: texto
+          label: Texto corto
+          type: text
+        - name: imagen
+          label: Imagen
+          type: image
+        - name: enlace
+          label: Enlace (opcional)
+          type: string
+      - name: galeria
+        label: Fotos de la galería
+        type: image
+        list: true
+        description: Solo para el tipo «Galería de fotos».
+      - name: video
+        label: Enlace del video de YouTube
+        type: string
+        description: 'Solo para el tipo «Video». Ej: https://www.youtube.com/watch?v=XXXXXXXXXXX'
+      - name: boton_texto
+        label: Texto del botón (opcional)
+        type: string
+      - name: boton_enlace
+        label: Enlace del botón
+        type: string
+        description: Página del sitio (ej. contacto.html) o dirección completa (https://…)
+      - name: ancla
+        label: Identificador (opcional)
+        type: string
+        description: 'Una palabra sin espacios para poder enlazar la sección. Ej: aliados → index.html#aliados'
+  - name: proyectos
+    label: Proyectos
+    type: object
+    fields:
+    - name: eyebrow
+      label: Texto pequeño sobre el título
+      type: string
+    - name: titulo
+      label: Título grande
+      type: string
+      description: 'Encierra una palabra entre asteriscos para resaltarla en verde. Ej: Oportunidades que nacen del *Catatumbo*'
+    - name: texto
+      label: Texto bajo el título
+      type: text
+    - name: imagen
+      label: Foto de fondo
+      type: image
+      description: Foto horizontal, mínimo 1600 px de ancho y máximo 1 MB.
+    - name: secciones
+      label: Secciones nuevas
+      type: object
+      list: true
+      fields:
+      - name: tipo
+        label: Tipo de sección
+        type: select
+        required: true
+        default: texto
+        options:
+          values:
+          - value: texto
+            label: Texto (con imagen ancha opcional)
+          - value: texto_imagen
+            label: Texto + imagen al lado
+          - value: tarjetas
+            label: Tarjetas (servicios, aliados, logros…)
+          - value: galeria
+            label: Galería de fotos
+          - value: video
+            label: Video de YouTube
+          - value: llamado
+            label: Franja de llamado a la acción
+      - name: visible
+        label: Mostrar en el sitio
+        type: boolean
+        default: true
+      - name: ubicacion
+        label: ¿Dónde aparece?
+        type: select
+        default: final
+        options:
+          values:
+          - value: inicio
+            label: Justo después del encabezado
+          - value: final
+            label: Al final de la página (antes del pie)
+      - name: fondo
+        label: Color de fondo
+        type: select
+        default: blanco
+        options:
+          values:
+          - value: blanco
+            label: Blanco
+          - value: suave
+            label: Gris suave
+          - value: oscuro
+            label: Azul pizarra (texto blanco)
+          - value: verde
+            label: Verde ADEL (texto blanco)
+      - name: eyebrow
+        label: Texto pequeño sobre el título
+        type: string
+      - name: titulo
+        label: Título
+        type: string
+        description: 'Encierra una palabra entre asteriscos para resaltarla. Ej: Nuestros *aliados*'
+      - name: texto
+        label: Texto
+        type: rich-text
+      - name: imagen
+        label: Imagen
+        type: image
+        description: Para los tipos «Texto» y «Texto + imagen al lado». Sube fotos JPG de máximo 1 MB.
+      - name: lado_imagen
+        label: Lado de la imagen
+        type: select
+        default: derecha
+        description: Solo para «Texto + imagen al lado».
+        options:
+          values:
+          - derecha
+          - izquierda
+      - name: tarjetas
+        label: Tarjetas
+        type: object
+        list: true
+        description: Solo para el tipo «Tarjetas».
+        fields:
+        - name: titulo
+          label: Título
+          type: string
+        - name: texto
+          label: Texto corto
+          type: text
+        - name: imagen
+          label: Imagen
+          type: image
+        - name: enlace
+          label: Enlace (opcional)
+          type: string
+      - name: galeria
+        label: Fotos de la galería
+        type: image
+        list: true
+        description: Solo para el tipo «Galería de fotos».
+      - name: video
+        label: Enlace del video de YouTube
+        type: string
+        description: 'Solo para el tipo «Video». Ej: https://www.youtube.com/watch?v=XXXXXXXXXXX'
+      - name: boton_texto
+        label: Texto del botón (opcional)
+        type: string
+      - name: boton_enlace
+        label: Enlace del botón
+        type: string
+        description: Página del sitio (ej. contacto.html) o dirección completa (https://…)
+      - name: ancla
+        label: Identificador (opcional)
+        type: string
+        description: 'Una palabra sin espacios para poder enlazar la sección. Ej: aliados → index.html#aliados'
+  - name: convocatorias
+    label: Convocatorias
+    type: object
+    fields:
+    - name: eyebrow
+      label: Texto pequeño sobre el título
+      type: string
+    - name: titulo
+      label: Título grande
+      type: string
+      description: 'Encierra una palabra entre asteriscos para resaltarla en verde. Ej: Oportunidades que nacen del *Catatumbo*'
+    - name: texto
+      label: Texto bajo el título
+      type: text
+    - name: imagen
+      label: Foto de fondo
+      type: image
+      description: Foto horizontal, mínimo 1600 px de ancho y máximo 1 MB.
+    - name: secciones
+      label: Secciones nuevas
+      type: object
+      list: true
+      fields:
+      - name: tipo
+        label: Tipo de sección
+        type: select
+        required: true
+        default: texto
+        options:
+          values:
+          - value: texto
+            label: Texto (con imagen ancha opcional)
+          - value: texto_imagen
+            label: Texto + imagen al lado
+          - value: tarjetas
+            label: Tarjetas (servicios, aliados, logros…)
+          - value: galeria
+            label: Galería de fotos
+          - value: video
+            label: Video de YouTube
+          - value: llamado
+            label: Franja de llamado a la acción
+      - name: visible
+        label: Mostrar en el sitio
+        type: boolean
+        default: true
+      - name: ubicacion
+        label: ¿Dónde aparece?
+        type: select
+        default: final
+        options:
+          values:
+          - value: inicio
+            label: Justo después del encabezado
+          - value: final
+            label: Al final de la página (antes del pie)
+      - name: fondo
+        label: Color de fondo
+        type: select
+        default: blanco
+        options:
+          values:
+          - value: blanco
+            label: Blanco
+          - value: suave
+            label: Gris suave
+          - value: oscuro
+            label: Azul pizarra (texto blanco)
+          - value: verde
+            label: Verde ADEL (texto blanco)
+      - name: eyebrow
+        label: Texto pequeño sobre el título
+        type: string
+      - name: titulo
+        label: Título
+        type: string
+        description: 'Encierra una palabra entre asteriscos para resaltarla. Ej: Nuestros *aliados*'
+      - name: texto
+        label: Texto
+        type: rich-text
+      - name: imagen
+        label: Imagen
+        type: image
+        description: Para los tipos «Texto» y «Texto + imagen al lado». Sube fotos JPG de máximo 1 MB.
+      - name: lado_imagen
+        label: Lado de la imagen
+        type: select
+        default: derecha
+        description: Solo para «Texto + imagen al lado».
+        options:
+          values:
+          - derecha
+          - izquierda
+      - name: tarjetas
+        label: Tarjetas
+        type: object
+        list: true
+        description: Solo para el tipo «Tarjetas».
+        fields:
+        - name: titulo
+          label: Título
+          type: string
+        - name: texto
+          label: Texto corto
+          type: text
+        - name: imagen
+          label: Imagen
+          type: image
+        - name: enlace
+          label: Enlace (opcional)
+          type: string
+      - name: galeria
+        label: Fotos de la galería
+        type: image
+        list: true
+        description: Solo para el tipo «Galería de fotos».
+      - name: video
+        label: Enlace del video de YouTube
+        type: string
+        description: 'Solo para el tipo «Video». Ej: https://www.youtube.com/watch?v=XXXXXXXXXXX'
+      - name: boton_texto
+        label: Texto del botón (opcional)
+        type: string
+      - name: boton_enlace
+        label: Enlace del botón
+        type: string
+        description: Página del sitio (ej. contacto.html) o dirección completa (https://…)
+      - name: ancla
+        label: Identificador (opcional)
+        type: string
+        description: 'Una palabra sin espacios para poder enlazar la sección. Ej: aliados → index.html#aliados'
+  - name: tienda
+    label: Tienda
+    type: object
+    fields:
+    - name: eyebrow
+      label: Texto pequeño sobre el título
+      type: string
+    - name: titulo
+      label: Título grande
+      type: string
+      description: 'Encierra una palabra entre asteriscos para resaltarla en verde. Ej: Oportunidades que nacen del *Catatumbo*'
+    - name: texto
+      label: Texto bajo el título
+      type: text
+    - name: imagen
+      label: Foto de fondo
+      type: image
+      description: Foto horizontal, mínimo 1600 px de ancho y máximo 1 MB.
+    - name: secciones
+      label: Secciones nuevas
+      type: object
+      list: true
+      fields:
+      - name: tipo
+        label: Tipo de sección
+        type: select
+        required: true
+        default: texto
+        options:
+          values:
+          - value: texto
+            label: Texto (con imagen ancha opcional)
+          - value: texto_imagen
+            label: Texto + imagen al lado
+          - value: tarjetas
+            label: Tarjetas (servicios, aliados, logros…)
+          - value: galeria
+            label: Galería de fotos
+          - value: video
+            label: Video de YouTube
+          - value: llamado
+            label: Franja de llamado a la acción
+      - name: visible
+        label: Mostrar en el sitio
+        type: boolean
+        default: true
+      - name: ubicacion
+        label: ¿Dónde aparece?
+        type: select
+        default: final
+        options:
+          values:
+          - value: inicio
+            label: Justo después del encabezado
+          - value: final
+            label: Al final de la página (antes del pie)
+      - name: fondo
+        label: Color de fondo
+        type: select
+        default: blanco
+        options:
+          values:
+          - value: blanco
+            label: Blanco
+          - value: suave
+            label: Gris suave
+          - value: oscuro
+            label: Azul pizarra (texto blanco)
+          - value: verde
+            label: Verde ADEL (texto blanco)
+      - name: eyebrow
+        label: Texto pequeño sobre el título
+        type: string
+      - name: titulo
+        label: Título
+        type: string
+        description: 'Encierra una palabra entre asteriscos para resaltarla. Ej: Nuestros *aliados*'
+      - name: texto
+        label: Texto
+        type: rich-text
+      - name: imagen
+        label: Imagen
+        type: image
+        description: Para los tipos «Texto» y «Texto + imagen al lado». Sube fotos JPG de máximo 1 MB.
+      - name: lado_imagen
+        label: Lado de la imagen
+        type: select
+        default: derecha
+        description: Solo para «Texto + imagen al lado».
+        options:
+          values:
+          - derecha
+          - izquierda
+      - name: tarjetas
+        label: Tarjetas
+        type: object
+        list: true
+        description: Solo para el tipo «Tarjetas».
+        fields:
+        - name: titulo
+          label: Título
+          type: string
+        - name: texto
+          label: Texto corto
+          type: text
+        - name: imagen
+          label: Imagen
+          type: image
+        - name: enlace
+          label: Enlace (opcional)
+          type: string
+      - name: galeria
+        label: Fotos de la galería
+        type: image
+        list: true
+        description: Solo para el tipo «Galería de fotos».
+      - name: video
+        label: Enlace del video de YouTube
+        type: string
+        description: 'Solo para el tipo «Video». Ej: https://www.youtube.com/watch?v=XXXXXXXXXXX'
+      - name: boton_texto
+        label: Texto del botón (opcional)
+        type: string
+      - name: boton_enlace
+        label: Enlace del botón
+        type: string
+        description: Página del sitio (ej. contacto.html) o dirección completa (https://…)
+      - name: ancla
+        label: Identificador (opcional)
+        type: string
+        description: 'Una palabra sin espacios para poder enlazar la sección. Ej: aliados → index.html#aliados'
+  - name: noticias
+    label: Noticias
+    type: object
+    fields:
+    - name: eyebrow
+      label: Texto pequeño sobre el título
+      type: string
+    - name: titulo
+      label: Título grande
+      type: string
+      description: 'Encierra una palabra entre asteriscos para resaltarla en verde. Ej: Oportunidades que nacen del *Catatumbo*'
+    - name: texto
+      label: Texto bajo el título
+      type: text
+    - name: imagen
+      label: Foto de fondo
+      type: image
+      description: Foto horizontal, mínimo 1600 px de ancho y máximo 1 MB.
+    - name: secciones
+      label: Secciones nuevas
+      type: object
+      list: true
+      fields:
+      - name: tipo
+        label: Tipo de sección
+        type: select
+        required: true
+        default: texto
+        options:
+          values:
+          - value: texto
+            label: Texto (con imagen ancha opcional)
+          - value: texto_imagen
+            label: Texto + imagen al lado
+          - value: tarjetas
+            label: Tarjetas (servicios, aliados, logros…)
+          - value: galeria
+            label: Galería de fotos
+          - value: video
+            label: Video de YouTube
+          - value: llamado
+            label: Franja de llamado a la acción
+      - name: visible
+        label: Mostrar en el sitio
+        type: boolean
+        default: true
+      - name: ubicacion
+        label: ¿Dónde aparece?
+        type: select
+        default: final
+        options:
+          values:
+          - value: inicio
+            label: Justo después del encabezado
+          - value: final
+            label: Al final de la página (antes del pie)
+      - name: fondo
+        label: Color de fondo
+        type: select
+        default: blanco
+        options:
+          values:
+          - value: blanco
+            label: Blanco
+          - value: suave
+            label: Gris suave
+          - value: oscuro
+            label: Azul pizarra (texto blanco)
+          - value: verde
+            label: Verde ADEL (texto blanco)
+      - name: eyebrow
+        label: Texto pequeño sobre el título
+        type: string
+      - name: titulo
+        label: Título
+        type: string
+        description: 'Encierra una palabra entre asteriscos para resaltarla. Ej: Nuestros *aliados*'
+      - name: texto
+        label: Texto
+        type: rich-text
+      - name: imagen
+        label: Imagen
+        type: image
+        description: Para los tipos «Texto» y «Texto + imagen al lado». Sube fotos JPG de máximo 1 MB.
+      - name: lado_imagen
+        label: Lado de la imagen
+        type: select
+        default: derecha
+        description: Solo para «Texto + imagen al lado».
+        options:
+          values:
+          - derecha
+          - izquierda
+      - name: tarjetas
+        label: Tarjetas
+        type: object
+        list: true
+        description: Solo para el tipo «Tarjetas».
+        fields:
+        - name: titulo
+          label: Título
+          type: string
+        - name: texto
+          label: Texto corto
+          type: text
+        - name: imagen
+          label: Imagen
+          type: image
+        - name: enlace
+          label: Enlace (opcional)
+          type: string
+      - name: galeria
+        label: Fotos de la galería
+        type: image
+        list: true
+        description: Solo para el tipo «Galería de fotos».
+      - name: video
+        label: Enlace del video de YouTube
+        type: string
+        description: 'Solo para el tipo «Video». Ej: https://www.youtube.com/watch?v=XXXXXXXXXXX'
+      - name: boton_texto
+        label: Texto del botón (opcional)
+        type: string
+      - name: boton_enlace
+        label: Enlace del botón
+        type: string
+        description: Página del sitio (ej. contacto.html) o dirección completa (https://…)
+      - name: ancla
+        label: Identificador (opcional)
+        type: string
+        description: 'Una palabra sin espacios para poder enlazar la sección. Ej: aliados → index.html#aliados'
+  - name: contacto
+    label: Contacto
+    type: object
+    fields:
+    - name: eyebrow
+      label: Texto pequeño sobre el título
+      type: string
+    - name: titulo
+      label: Título grande
+      type: string
+      description: 'Encierra una palabra entre asteriscos para resaltarla en verde. Ej: Oportunidades que nacen del *Catatumbo*'
+    - name: texto
+      label: Texto bajo el título
+      type: text
+    - name: imagen
+      label: Foto de fondo
+      type: image
+      description: Foto horizontal, mínimo 1600 px de ancho y máximo 1 MB.
+    - name: secciones
+      label: Secciones nuevas
+      type: object
+      list: true
+      fields:
+      - name: tipo
+        label: Tipo de sección
+        type: select
+        required: true
+        default: texto
+        options:
+          values:
+          - value: texto
+            label: Texto (con imagen ancha opcional)
+          - value: texto_imagen
+            label: Texto + imagen al lado
+          - value: tarjetas
+            label: Tarjetas (servicios, aliados, logros…)
+          - value: galeria
+            label: Galería de fotos
+          - value: video
+            label: Video de YouTube
+          - value: llamado
+            label: Franja de llamado a la acción
+      - name: visible
+        label: Mostrar en el sitio
+        type: boolean
+        default: true
+      - name: ubicacion
+        label: ¿Dónde aparece?
+        type: select
+        default: final
+        options:
+          values:
+          - value: inicio
+            label: Justo después del encabezado
+          - value: final
+            label: Al final de la página (antes del pie)
+      - name: fondo
+        label: Color de fondo
+        type: select
+        default: blanco
+        options:
+          values:
+          - value: blanco
+            label: Blanco
+          - value: suave
+            label: Gris suave
+          - value: oscuro
+            label: Azul pizarra (texto blanco)
+          - value: verde
+            label: Verde ADEL (texto blanco)
+      - name: eyebrow
+        label: Texto pequeño sobre el título
+        type: string
+      - name: titulo
+        label: Título
+        type: string
+        description: 'Encierra una palabra entre asteriscos para resaltarla. Ej: Nuestros *aliados*'
+      - name: texto
+        label: Texto
+        type: rich-text
+      - name: imagen
+        label: Imagen
+        type: image
+        description: Para los tipos «Texto» y «Texto + imagen al lado». Sube fotos JPG de máximo 1 MB.
+      - name: lado_imagen
+        label: Lado de la imagen
+        type: select
+        default: derecha
+        description: Solo para «Texto + imagen al lado».
+        options:
+          values:
+          - derecha
+          - izquierda
+      - name: tarjetas
+        label: Tarjetas
+        type: object
+        list: true
+        description: Solo para el tipo «Tarjetas».
+        fields:
+        - name: titulo
+          label: Título
+          type: string
+        - name: texto
+          label: Texto corto
+          type: text
+        - name: imagen
+          label: Imagen
+          type: image
+        - name: enlace
+          label: Enlace (opcional)
+          type: string
+      - name: galeria
+        label: Fotos de la galería
+        type: image
+        list: true
+        description: Solo para el tipo «Galería de fotos».
+      - name: video
+        label: Enlace del video de YouTube
+        type: string
+        description: 'Solo para el tipo «Video». Ej: https://www.youtube.com/watch?v=XXXXXXXXXXX'
+      - name: boton_texto
+        label: Texto del botón (opcional)
+        type: string
+      - name: boton_enlace
+        label: Enlace del botón
+        type: string
+        description: Página del sitio (ej. contacto.html) o dirección completa (https://…)
+      - name: ancla
+        label: Identificador (opcional)
+        type: string
+        description: 'Una palabra sin espacios para poder enlazar la sección. Ej: aliados → index.html#aliados'
+- name: paginas-extra
+  label: ➕ Páginas nuevas
+  type: file
+  path: datos/paginas-extra.json
+  format: json
+  list: true
+  fields:
+  - name: publicado
+    label: Publicada
+    type: boolean
+    default: true
+  - name: slug
+    label: Dirección de la página
+    type: string
+    required: true
+    description: 'Minúsculas y guiones, sin tildes. Ej: red-de-mujeres → se abre en pagina.html?p=red-de-mujeres'
+  - name: titulo
+    label: Título
+    type: string
+    required: true
+  - name: en_menu
+    label: Mostrar en el menú principal
+    type: boolean
+    default: false
+  - name: menu
+    label: Nombre corto en el menú
+    type: string
+  - name: eyebrow
+    label: Texto pequeño sobre el título
+    type: string
+  - name: texto
+    label: Texto bajo el título
+    type: text
+  - name: imagen
+    label: Foto de fondo
+    type: image
+  - name: descripcion
+    label: Descripción para Google
+    type: text
+  - name: secciones
+    label: Secciones
+    type: object
+    list: true
+    fields:
+    - name: tipo
+      label: Tipo de sección
+      type: select
+      required: true
+      default: texto
+      options:
+        values:
+        - value: texto
+          label: Texto (con imagen ancha opcional)
+        - value: texto_imagen
+          label: Texto + imagen al lado
+        - value: tarjetas
+          label: Tarjetas (servicios, aliados, logros…)
+        - value: galeria
+          label: Galería de fotos
+        - value: video
+          label: Video de YouTube
+        - value: llamado
+          label: Franja de llamado a la acción
+    - name: visible
+      label: Mostrar en el sitio
+      type: boolean
+      default: true
+    - name: ubicacion
+      label: ¿Dónde aparece?
+      type: select
+      default: final
+      options:
+        values:
+        - value: inicio
+          label: Justo después del encabezado
+        - value: final
+          label: Al final de la página (antes del pie)
+    - name: fondo
+      label: Color de fondo
+      type: select
+      default: blanco
+      options:
+        values:
+        - value: blanco
+          label: Blanco
+        - value: suave
+          label: Gris suave
+        - value: oscuro
+          label: Azul pizarra (texto blanco)
+        - value: verde
+          label: Verde ADEL (texto blanco)
+    - name: eyebrow
+      label: Texto pequeño sobre el título
+      type: string
+    - name: titulo
+      label: Título
+      type: string
+      description: 'Encierra una palabra entre asteriscos para resaltarla. Ej: Nuestros *aliados*'
+    - name: texto
+      label: Texto
+      type: rich-text
+    - name: imagen
+      label: Imagen
+      type: image
+      description: Para los tipos «Texto» y «Texto + imagen al lado». Sube fotos JPG de máximo 1 MB.
+    - name: lado_imagen
+      label: Lado de la imagen
+      type: select
+      default: derecha
+      description: Solo para «Texto + imagen al lado».
+      options:
+        values:
+        - derecha
+        - izquierda
+    - name: tarjetas
+      label: Tarjetas
+      type: object
+      list: true
+      description: Solo para el tipo «Tarjetas».
+      fields:
+      - name: titulo
+        label: Título
+        type: string
+      - name: texto
+        label: Texto corto
+        type: text
+      - name: imagen
+        label: Imagen
+        type: image
+      - name: enlace
+        label: Enlace (opcional)
+        type: string
+    - name: galeria
+      label: Fotos de la galería
+      type: image
+      list: true
+      description: Solo para el tipo «Galería de fotos».
+    - name: video
+      label: Enlace del video de YouTube
+      type: string
+      description: 'Solo para el tipo «Video». Ej: https://www.youtube.com/watch?v=XXXXXXXXXXX'
+    - name: boton_texto
+      label: Texto del botón (opcional)
+      type: string
+    - name: boton_enlace
+      label: Enlace del botón
+      type: string
+      description: Página del sitio (ej. contacto.html) o dirección completa (https://…)
+    - name: ancla
+      label: Identificador (opcional)
+      type: string
+      description: 'Una palabra sin espacios para poder enlazar la sección. Ej: aliados → index.html#aliados'
+- name: equipo
+  label: 👥 Equipo
+  type: file
+  path: datos/equipo.json
+  format: json
+  list: true
+  fields:
+  - name: nombre
+    label: Nombre
+    type: string
+  - name: cargo
+    label: Cargo
+    type: string
+  - name: foto
+    label: Foto (cuadrada)
+    type: image
+- name: documentos
+  label: 📁 Documentos de transparencia
+  type: file
+  path: datos/documentos.json
+  format: json
+  list: true
+  fields:
+  - name: titulo
+    label: Nombre del documento
+    type: string
+  - name: detalle
+    label: Detalle
+    type: string
+  - name: archivo
+    label: Archivo (PDF)
+    type: file
+- name: sitio
+  label: ⚙️ Datos de contacto y tienda
+  type: file
+  path: datos/sitio.json
+  format: json
+  fields:
+  - name: nombre_corto
+    label: Nombre corto / sigla
+    type: string
+    description: 'Debe coincidir con el nombre registrado en Google for Nonprofits: ADEL Catatumbo'
+  - name: razon_social
+    label: Razón social (igual al certificado de Cámara de Comercio)
+    type: string
+  - name: nit
+    label: NIT
+    type: string
+  - name: naturaleza
+    label: Naturaleza jurídica
+    type: string
+  - name: correo_institucional
+    label: Correo institucional @adelcatatumbo.org (si ya funciona)
+    type: string
+    description: Si se llena, se muestra en todo el sitio en lugar del correo de abajo.
+  - name: correo
+    label: Correo que se muestra y recibe mensajes
+    type: string
+  - name: telefono
+    label: Teléfono visible
+    type: string
+  - name: whatsapp
+    label: WhatsApp (57 + celular, sin espacios)
+    type: string
+  - name: direccion
+    label: Dirección de la sede
+    type: string
+  - name: facebook
+    label: Enlace de Facebook
+    type: string
+  - name: instagram
+    label: Enlace de Instagram
+    type: string
+  - name: youtube
+    label: Enlace de YouTube
+    type: string
+  - name: tiendaAbierta
+    label: Tienda abierta (desactivado = «Muy pronto»)
+    type: boolean
+  - name: entregas
+    label: Opciones de entrega
+    type: object
+    list: true
+    fields:
+    - name: id
+      label: Identificador
+      type: string
+    - name: nombre
+      label: Nombre
+      type: string
+    - name: detalle
+      label: Detalle
+      type: string
+    - name: costo
+      label: Costo (pesos)
+      type: number
+  - name: pagos
+    label: Medios de pago
+    type: string
+    list: true
+actions:
+- name: publicar
+  label: 🚀 Publicar en adelcatatumbo.org
+  workflow: publicar.yml
+  confirm:
+    title: ¿Publicar los cambios?
+    message: Todo lo que guardaste en el panel pasará al sitio oficial adelcatatumbo.org en 1 a 2 minutos. Revisa antes la
+      vista previa.
+    button: Sí, publicar

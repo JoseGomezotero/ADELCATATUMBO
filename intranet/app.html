@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Intranet · ADEL Catatumbo</title>
+<link rel="icon" href="../assets/img/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/intranet.css">
+</head>
+<body>
+<div class="cargando" id="arranque">Cargando la intranet…</div>
+<div class="app oculto" id="app">
+  <aside class="lateral" id="lateral">
+    <a class="logo" href="#/inicio"><img src="../assets/img/logo-adel-catatumbo.png" alt=""><div><b>ADEL Catatumbo</b><span>Intranet</span></div></a>
+    <nav id="menu"></nav>
+    <div class="pie-lat">Sistema de gestión interna<br><a href="../index.html" target="_blank" rel="noopener">Ver sitio web ↗</a></div>
+  </aside>
+  <div class="principal">
+    <div class="barra">
+      <button class="bt bt-sec bt-icono menu-movil" id="btnMenu" aria-label="Menú"><svg class="i" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+      <div class="ruta" id="ruta"></div>
+      <div class="der">
+        <div class="usuario" id="usuario" tabindex="0">
+          <div class="av" id="uAv"></div><div class="nom" id="uNom"></div>
+          <svg class="i" viewBox="0 0 24 24" style="width:16px;color:var(--gris)"><path d="m6 9 6 6 6-6"/></svg>
+          <div class="menu-usuario" id="menuUsuario">
+            <a href="#/cuenta"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>Mi cuenta</a>
+            <button id="btnSalir"><svg class="i" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>Cerrar sesión</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <main class="contenido" id="vista"></main>
+  </div>
+</div>
+<div class="velo" id="velo"></div>
+<aside class="cajon" id="cajon" aria-hidden="true"></aside>
+<div class="notifs" id="notifs"></div>
+
+<script src="https://unpkg.com/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="js/config.js"></script>
+<script src="js/datos.js"></script>
+<!-- contenido del sitio (para el módulo Página web) -->
+<script src="../datos/convocatorias.js"></script>
+<script src="../datos/noticias.js"></script>
+<script src="../datos/proyectos.js"></script>
+<script src="../datos/productos.js"></script>
+<script src="../datos/sitio.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

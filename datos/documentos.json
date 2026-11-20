@@ -1,0 +1,32 @@
+[
+  {
+    "titulo": "Certificado de existencia y representación legal",
+    "detalle": "Cámara de Comercio de Ocaña",
+    "archivo": "documentos/institucionales/certificado-camara-comercio.pdf"
+  },
+  {
+    "titulo": "RUT",
+    "detalle": "Registro Único Tributario · NIT 901.227.376-8",
+    "archivo": "documentos/institucionales/rut.pdf"
+  },
+  {
+    "titulo": "Estatutos",
+    "detalle": "Documento de constitución",
+    "archivo": "documentos/institucionales/estatutos.pdf"
+  },
+  {
+    "titulo": "Informe de gestión",
+    "detalle": "Último año",
+    "archivo": "documentos/institucionales/informe-gestion.pdf"
+  },
+  {
+    "titulo": "Estados financieros",
+    "detalle": "Último año",
+    "archivo": "documentos/institucionales/estados-financieros.pdf"
+  },
+  {
+    "titulo": "Política de tratamiento de datos",
+    "detalle": "Ley 1581 de 2012",
+    "archivo": "documentos/institucionales/politica-datos.pdf"
+  }
+]

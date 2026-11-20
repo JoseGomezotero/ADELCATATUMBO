@@ -1,0 +1,74 @@
+SITIO WEB ADEL CATATUMBO - GUÍA RÁPIDA
+======================================
+
+CÓMO SE ACTUALIZA AHORA: PANEL DE ADMINISTRACIÓN (Pages CMS)
+  Entrar:   https://app.pagescms.org  (con GitHub o con el correo invitado)
+  Rama:     trabajar siempre en la rama "edicion".
+  Guardar:  cada "Save" queda en la VISTA PREVIA (rama edicion en Netlify),
+            con una franja amarilla arriba. No cambia el sitio oficial.
+  Publicar: botón "🚀 Publicar en adelcatatumbo.org" del panel. En 1 a 2
+            minutos los cambios quedan en el sitio oficial.
+  Publica pocas veces y con varios cambios juntos: el plan gratuito de
+  Netlify alcanza para unas 20 publicaciones al mes en total.
+
+QUÉ SE EDITA EN CADA MENÚ DEL PANEL
+  📢 Convocatorias        publicar y adjuntar PDF de términos y resultados.
+                          El ESTADO es automático según las fechas (hora de Colombia):
+                          antes de la apertura «Próximamente», hasta el cierre «Abierta»,
+                          hasta «Fin de la evaluación» «En evaluación» y luego «Cerrada».
+                          Si hay adenda u otrosí que amplía el plazo, llene
+                          «Nuevo cierre por adenda u otrosí» (y suba el PDF).
+  📰 Noticias             publicar noticias con foto
+  🌱 Proyectos            agregar y editar proyectos (destacar en inicio)
+  🛒 Tienda · Productos   productos, precios, fotos, agotado
+  📄 Textos y secciones   título, texto y foto del encabezado de cada página,
+                          misión y visión, y SECCIONES NUEVAS en cualquier página
+                          (texto, texto + imagen, tarjetas, galería, video de
+                          YouTube, franja de llamado)
+  ➕ Páginas nuevas       crea páginas completas (pagina.html?p=nombre) y,
+                          si quieres, las agrega al menú
+  👥 Equipo               nombre, cargo y foto
+  📁 Documentos           PDF de transparencia
+  ⚙️ Datos de contacto     correo, teléfono, WhatsApp, dirección, redes,
+                          abrir o cerrar la tienda, entregas y medios de pago
+  Media                   fotos y PDF subidos (quedan en la carpeta archivos/)
+
+  Truco: en un título, *palabra* entre asteriscos sale resaltada.
+  "Publicada / Publicado" apagado = borrador (no se ve en el sitio).
+
+ARCHIVOS DEL SISTEMA (solo para el administrador técnico)
+  .pages.yml                  qué campos muestra el panel
+  datos/*.json                el contenido (lo edita el panel)
+  datos/*.js                  se generan solos desde los .json; NO editarlos
+  scripts/construir.js        convierte .json en .js (Netlify lo ejecuta)
+  netlify.toml                configuración de publicación de Netlify
+  .github/workflows/publicar.yml  botón "Publicar": pasa edicion -> main
+  datos/mapa-catatumbo.js     límites de municipios del mapa (no lo edita el panel)
+  assets/js/analitica.js      Google Analytics (GA_ID = G-Q8G562T5W1, activo)
+  assets/css/estilos.css      colores y diseño
+  assets/js/componentes.js    menú, encabezado, pie y dibujo de las secciones
+
+  Vista local sin internet: abrir index.html en el navegador. Si cambiaste
+  algún .json a mano, ejecuta antes:  node scripts/construir.js
+
+INTRANET DE TRABAJADORES (nuevo)
+  Dirección: /intranet/  ·  Verificación pública de cartas: /verificar.html
+  Cartas laborales, talento humano, CRM de aliados, gestión de la página,
+  usuarios con 5 perfiles y bitácora. Para ponerla en funcionamiento hay que
+  conectar la base de datos: ver intranet/LEEME-INTRANET.txt (Supabase gratis).
+
+PÁGINAS
+  index.html, quienes-somos.html, proyectos.html, convocatorias.html,
+  tienda.html, noticias.html, contacto.html, pagina.html (páginas nuevas),
+  404.html, mockup.html (presentación del sitio)
+
+PENDIENTES
+  - Correo y WhatsApp temporales (⚙️ Datos de contacto en el panel):
+      catatumbosistemasadel@gmail.com -> contacto@adelcatatumbo.org cuando exista
+      573003772153 -> WhatsApp oficial
+  - Redes sociales, fotos propias, equipo real, noticias y productos reales.
+
+ALTERNATIVA SIN PANEL: COLOMBIAHOSTING (cPanel)
+  El sitio también funciona subido a public_html (con .htaccess). En ese
+  caso no hay panel: se edita datos/*.json, se ejecuta
+  node scripts/construir.js y se suben los archivos cambiados.

@@ -1,0 +1,60 @@
+/* ARCHIVO GENERADO AUTOMÁTICAMENTE desde datos/paginas.json — no editar aquí.
+   Edita el contenido en el panel (app.pagescms.org) o en el .json. */
+window.PAGINAS = {
+ "inicio": {
+  "eyebrow": "Desarrollo económico local · Cultura de paz",
+  "titulo": "Oportunidades que nacen del *Catatumbo*",
+  "texto": "Fortalecemos la economía campesina conectando a las familias productoras con mercados justos, promoviendo prácticas sostenibles y construyendo capital social para un territorio en paz.",
+  "imagen": "https://images.unsplash.com/photo-1633627340121-a624e4d44b78",
+  "secciones": []
+ },
+ "quienes_somos": {
+  "eyebrow": "Quiénes somos",
+  "titulo": "Desarrollo económico local con *enfoque de frontera*",
+  "texto": "Somos la Corporación Mixta Agencia de Desarrollo Económico Local del Norte de Santander «ADEL Catatumbo con enfoque de frontera», una organización gestora de cambio y desarrollo social para la región del Catatumbo.",
+  "imagen": "https://images.unsplash.com/photo-1631137697927-612f09b9684e",
+  "quienes": "La Agencia de Desarrollo Económico Local ADEL Catatumbo del Norte de Santander es una corporación mixta constituida por entidades territoriales públicas y privadas sin fines de lucro, que brinda sus servicios a la comunidad con el propósito de gestionar, promover, administrar, investigar, asesorar, ejecutar e integrar el territorio.",
+  "quienes2": "Facilitamos el fortalecimiento y la transformación del tejido social a partir del empoderamiento del capital humano de la región para la autogestión de sus apuestas productivas, culturales, sociales y ambientales, mediante el acompañamiento y la orientación de estrategias de construcción e implementación de agendas de impacto regional, como un aporte valioso a la construcción de paz.",
+  "mision": "Promover, implementar y ejecutar procesos de Desarrollo Económico Local en la región del Catatumbo, como un instrumento de desarrollo sociocultural participativo a nivel comunitario e institucional, que aporte al desarrollo integral de las comunidades y complemente los esfuerzos particulares y estatales para la solución de la problemática social, con un enfoque en la cultura de paz.",
+  "vision": "En el año 2030 la Corporación Mixta Agencia de Desarrollo Económico Local del Norte de Santander «ADEL Catatumbo con enfoque de frontera» se consolidará como una organización gestora de cambio y desarrollo social que habrá incidido de manera efectiva en la ejecución de procesos de Desarrollo Económico Local y programas sociales orientados a la creación de capital social, las capacidades instaladas, la reducción de la pobreza, el mejoramiento de la convivencia y la construcción de paz en la región y el departamento.",
+  "buscamos": "Contribuir a la consolidación de una paz estable y duradera en la región del Catatumbo a través del fortalecimiento de las dinámicas productivas con potencial competitivo, desde un enfoque de Desarrollo Económico Local (DEL), de sostenibilidad ambiental e inclusión social en los municipios de la región.",
+  "objetivo": "Articular con el Gobierno Nacional, las entidades territoriales, la cooperación internacional y las organizaciones sociales una gobernanza que potencie las capacidades locales para la producción y transformación de café, cacao, caña panelera, aceite de palma, piña y productos asociados, de forma rentable y competitiva, bajo el enfoque DEL y de inclusión social, reconociendo e impulsando los saberes ancestrales y promoviendo una cultura de paz y de legalidad.",
+  "recurso": "Contamos con un equipo de profesionales altamente calificados que, a partir de su amplia experiencia e identidad con el territorio, impulsa procesos e iniciativas para mejorar la calidad de vida y garantizar los derechos de las comunidades.",
+  "secciones": []
+ },
+ "proyectos": {
+  "eyebrow": "Proyectos",
+  "titulo": "Iniciativas que transforman el territorio",
+  "texto": "Trabajamos de la mano con la cooperación internacional, la Red Adelco, las alcaldías y las organizaciones de productores del Catatumbo.",
+  "imagen": "https://images.unsplash.com/photo-1633627388746-8cd271f7d526",
+  "secciones": []
+ },
+ "convocatorias": {
+  "eyebrow": "Convocatorias",
+  "titulo": "Convocatorias y oportunidades",
+  "texto": "Consulta los procesos de contratación, selección de proveedores y apoyo a iniciativas productivas. Descarga los términos de referencia y postúlate dentro de las fechas indicadas.",
+  "imagen": "https://images.unsplash.com/photo-1548104883-562bcc1e4c4d",
+  "secciones": []
+ },
+ "tienda": {
+  "eyebrow": "Tienda campesina",
+  "titulo": "Del campo del Catatumbo a tu mesa",
+  "texto": "Kits de mercado y productos cultivados por familias campesinas y la Red de Mujeres del Catatumbo. Lo que compras llega directo a quienes lo producen.",
+  "imagen": "https://images.unsplash.com/photo-1672851613221-c56f31efce8c",
+  "secciones": []
+ },
+ "noticias": {
+  "eyebrow": "Noticias",
+  "titulo": "Lo que está pasando en el territorio",
+  "texto": "Actividades, logros y novedades de la agencia y de las comunidades del Catatumbo.",
+  "imagen": "https://images.unsplash.com/photo-1633627340121-a624e4d44b78",
+  "secciones": []
+ },
+ "contacto": {
+  "eyebrow": "Contacto",
+  "titulo": "Hablemos de desarrollo para el Catatumbo",
+  "texto": "¿Eres productor, organización, entidad pública, cooperante o empresa? Escríbenos y construyamos juntos.",
+  "imagen": "https://images.unsplash.com/photo-1633627346972-0f3dfa551171",
+  "secciones": []
+ }
+};
